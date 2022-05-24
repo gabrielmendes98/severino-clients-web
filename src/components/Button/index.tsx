@@ -1,11 +1,14 @@
-import { ReactNode, FC } from 'react';
+import { ReactNode } from 'react';
+import MuiButton from '@mui/material/Button';
 
 interface Props {
   children: ReactNode;
 }
 
-const Button: FC<Props> = ({ children, ...props }) => (
-  <button {...props}>{children}</button>
+const Button = ({ children, ...props }: Props) => (
+  <MuiButton variant="outlined" {...props}>
+    {children}
+  </MuiButton>
 );
 
 export default Button;

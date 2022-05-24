@@ -1,18 +1,34 @@
 import { Provider } from 'react-redux';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
+import { CacheProvider, EmotionCache } from '@emotion/react';
 import { store } from 'common/store/store';
-import 'common/styles/globals.css';
+import ThemeProvider from 'common/providers/Theme';
+import createEmotionCache from 'common/styles/createEmotionCache';
 
-const MyApp = ({ Component, pageProps }: AppProps) => (
-  <Provider store={store}>
-    <Head>
-      <title>Severino</title>
-      <meta name="description" content="Severino" />
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-    <Component {...pageProps} />
-  </Provider>
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
+
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+const MyApp = ({
+  Component,
+  emotionCache = clientSideEmotionCache,
+  pageProps,
+}: MyAppProps) => (
+  <CacheProvider value={emotionCache}>
+    <Provider store={store}>
+      <Head>
+        <title>Severino</title>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+      </Head>
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </Provider>
+  </CacheProvider>
 );
 
 export default MyApp;
