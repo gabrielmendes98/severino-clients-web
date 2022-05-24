@@ -1,6 +1,15 @@
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
+declare module '@mui/material/styles' {
+  interface Palette {
+    white: Palette['primary'];
+  }
+  interface PaletteOptions {
+    white: PaletteOptions['primary'];
+  }
+}
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -11,6 +20,12 @@ const theme = createTheme({
     },
     error: {
       main: red.A400,
+    },
+    white: {
+      main: '#FFFFFF',
+    },
+    background: {
+      default: '#F0F0F0',
     },
   },
 });

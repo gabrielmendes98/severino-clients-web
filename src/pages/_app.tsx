@@ -5,6 +5,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import { store } from 'common/store/store';
 import ThemeProvider from 'common/providers/Theme';
 import createEmotionCache from 'common/styles/createEmotionCache';
+import Header from 'components/Header';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -25,6 +26,7 @@ const MyApp = ({
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider>
+        <Header />
         <Component {...pageProps} />
       </ThemeProvider>
     </Provider>
