@@ -1,5 +1,6 @@
-import { SxProps, Theme } from '@mui/material';
+import MuiButton from '@mui/material/Button';
+import styled from '@emotion/styled';
 
-export const sx: SxProps<Theme> = {
-  textTransform: 'none',
-};
+export const BaseButton = styled(MuiButton)`
+  text-transform: none;
+`;

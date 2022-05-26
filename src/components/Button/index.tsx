@@ -1,15 +1,15 @@
 import { ReactNode, forwardRef, Ref } from 'react';
-import MuiButton, { ButtonProps } from '@mui/material/Button';
-import { sx } from './styles';
+import { ButtonProps } from '@mui/material/Button';
+import { BaseButton } from './styles';
 
 interface Props extends ButtonProps {
   children: ReactNode;
 }
 
 const Button = ({ children, ...props }: Props, ref: Ref<any>) => (
-  <MuiButton {...props} ref={ref} sx={sx}>
+  <BaseButton {...props} ref={ref}>
     {children}
-  </MuiButton>
+  </BaseButton>
 );
 
 export default forwardRef(Button);

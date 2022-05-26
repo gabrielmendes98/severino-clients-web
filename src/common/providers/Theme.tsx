@@ -1,5 +1,6 @@
-import { Global } from '@emotion/react';
+import { Global, ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+
 import { CssBaseline } from '@mui/material';
 import { ReactNode } from 'react';
 import theme from 'common/styles/theme';
@@ -12,9 +13,11 @@ interface Props {
 
 const ThemeProvider = ({ children }: Props) => (
   <MuiThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
-    <CssBaseline />
-    {children}
+    <EmotionThemeProvider theme={theme}>
+      <Global styles={globalStyles} />
+      <CssBaseline />
+      {children}
+    </EmotionThemeProvider>
   </MuiThemeProvider>
 );
 
