@@ -1,3 +1,5 @@
+import { Theme as MaterialUITheme } from '@mui/material';
+
 declare module '@mui/material/styles' {
   interface Palette {
     white: Palette['primary'];
@@ -7,8 +9,18 @@ declare module '@mui/material/styles' {
   }
 }
 
+declare module '@emotion/react' {
+  interface Theme extends MaterialUITheme {}
+}
+
 declare module '@mui/material/AppBar' {
   interface AppBarPropsColorOverrides {
+    white: true;
+  }
+}
+
+declare module '@mui/material/TextField' {
+  interface TextFieldPropsColorOverrides {
     white: true;
   }
 }
