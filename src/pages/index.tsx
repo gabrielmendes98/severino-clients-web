@@ -13,6 +13,8 @@ import { DoodleImage } from './styles';
 const Home: NextPage = () => {
   const [services, setServices] = useState<Service[]>([]);
 
+  const onSearchChange = (value: string) => console.log('change', value);
+
   useEffect(() => {
     servicesService.listMostSearched().then(setServices);
   }, []);
@@ -31,7 +33,11 @@ const Home: NextPage = () => {
       </Text>
 
       <Grid container item justifyContent="center">
-        <SearchInput placeholder="Buscar serviços" maxWidth={1000} />
+        <SearchInput
+          placeholder="Buscar serviços"
+          maxWidth={1000}
+          onChange={onSearchChange}
+        />
       </Grid>
 
       <Text
