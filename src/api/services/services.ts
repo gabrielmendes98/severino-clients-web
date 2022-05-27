@@ -10,8 +10,8 @@ const servicesEndpoints = {
 const servicesService = {
   listMostSearched: () =>
     baseApi.get<Service[], Service[]>(servicesEndpoints.listMostSearched),
-  // search: (value: string) =>
-  //   baseApi.get(servicesEndpoints.search(value), { needLocation: true }),
+  search: (value: string) =>
+    baseApi.get<Service[], Service[]>(servicesEndpoints.search(value)),
   // searchWorkers: (id, params) =>
   //   baseApi.get(servicesEndpoints.searchWorkers(id), {
   //     needLocation: true,

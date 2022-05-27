@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import servicesService from 'api/services/services';
+import { parseToSelect } from 'common/utils/parsers';
 import ServiceCard from 'templates/ServiceCard';
 import Button from 'components/Button';
 import Text from 'components/Text';
@@ -12,8 +13,18 @@ import { DoodleImage } from './styles';
 
 const Home: NextPage = () => {
   const [services, setServices] = useState<Service[]>([]);
+  const [searchedServices, setSearchedServices] = useState<SelectOptions>([]);
 
-  const onSearchChange = (value: string) => console.log('change', value);
+  const onSearchChange = (value: string) => {
+    if (value) {
+      servicesService
+        .search(value)
+        .then(response => parseToSelect(response, 'serviceName', 'serviceId'))
+        .then(setSearchedServices);
+    } else {
+      setSearchedServices([]);
+    }
+  };
 
   useEffect(() => {
     servicesService.listMostSearched().then(setServices);
@@ -37,6 +48,7 @@ const Home: NextPage = () => {
           placeholder="Buscar serviços"
           maxWidth={1000}
           onChange={onSearchChange}
+          options={searchedServices}
         />
       </Grid>
 

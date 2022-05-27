@@ -9,10 +9,7 @@ interface Props {
   placeholder?: string;
   maxWidth?: number;
   onChange: (value: string) => any;
-  options?: {
-    label: string;
-    value: string;
-  }[];
+  options?: SelectOptions;
 }
 
 const SearchInput = ({
