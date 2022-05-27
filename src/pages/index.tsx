@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import servicesService from 'api/services/services';
 import ServiceCard from 'templates/ServiceCard';
 import Button from 'components/Button';
 import Text from 'components/Text';
@@ -12,9 +13,20 @@ import { DoodleImage } from './styles';
 const Home: NextPage = () => {
   const [services, setServices] = useState<Service[]>([]);
 
+  useEffect(() => {
+    servicesService.listMostSearched().then(setServices);
+  }, []);
+
   return (
     <Grid container direction="column">
-      <Text variant="h4" align="center" fontWeight="bold" color="secondary">
+      <Text
+        variant="h4"
+        align="center"
+        fontWeight="bold"
+        color="secondary"
+        marginTop={12}
+        marginBottom={6}
+      >
         Resolva seus problemas de maneira rápida e fácil
       </Text>
 
@@ -22,22 +34,38 @@ const Home: NextPage = () => {
         <SearchInput placeholder="Buscar serviços" maxWidth={1000} />
       </Grid>
 
-      <Text variant="h6" color="GrayText">
+      <Text
+        variant="h6"
+        color="GrayText"
+        fontWeight="bold"
+        marginTop={10}
+        marginBottom={3}
+      >
         Escolha o serviço que você precisa
       </Text>
-      {services.map(service => (
-        <ServiceCard
-          key={service.id}
-          serviceAvatar={service.serviceCategory.avatarUrl}
-          serviceName={service.name}
-        />
-      ))}
 
-      <Grid container item justifyContent="center">
+      <Grid container justifyContent="space-around">
+        {services.map(service => (
+          <ServiceCard
+            key={service.id}
+            serviceAvatar={service.serviceCategory.avatarUrl}
+            serviceName={service.name}
+          />
+        ))}
+      </Grid>
+
+      <Grid container item justifyContent="center" marginTop={3}>
         <Button variant="outlined">Ver todos os serviços</Button>
       </Grid>
 
-      <Text variant="h6" color="GrayText" align="center">
+      <Text
+        variant="h6"
+        color="GrayText"
+        align="center"
+        fontWeight="bold"
+        marginTop={10}
+        marginBottom={6}
+      >
         Severino é uma plataforma para pessoas encontrarem profissionais que
         consigam resolver seus problemas. Nosso objetivo é tornar mais fácil a
         busca e o contato com diferentes prestadores de serviço. Além disso,
