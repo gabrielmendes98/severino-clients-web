@@ -1,15 +1,17 @@
-import { useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import debounce from 'lodash.debounce';
+import Loader from 'components/Loader';
 
 interface Props {
   placeholder?: string;
   maxWidth?: number;
   onChange: (value: string) => any;
   options?: SelectOptions;
+  loading?: boolean;
 }
 
 const SearchInput = ({
@@ -17,6 +19,7 @@ const SearchInput = ({
   maxWidth,
   onChange,
   options = [],
+  loading,
 }: Props) => {
   const onValueChange = useMemo(
     () => debounce((e, value) => onChange(value), 500),
@@ -48,7 +51,11 @@ const SearchInput = ({
             ...params.InputProps,
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon />
+                {loading ? (
+                  <Loader color="primary" size={20} />
+                ) : (
+                  <SearchIcon />
+                )}
               </InputAdornment>
             ),
           }}
