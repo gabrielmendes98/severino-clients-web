@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import servicesService from 'api/services/services';
 import useSearchServices from 'common/hooks/useSearchServices';
 import ServiceCard from 'templates/ServiceCard';
@@ -12,6 +14,7 @@ import { infoDoodles } from './utils';
 import { DoodleImage } from './styles';
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const [services, setServices] = useState<Service[]>([]);
   const { loading, searchServices, searchedServices } = useSearchServices();
 
@@ -39,6 +42,9 @@ const Home: NextPage = () => {
           onChange={searchServices}
           options={searchedServices}
           loading={loading}
+          onOptionSelect={(option: SelectOption) =>
+            router.push(`/services/${option.value}`)
+          }
         />
       </Grid>
 
@@ -58,12 +64,15 @@ const Home: NextPage = () => {
             key={service.id}
             serviceAvatar={service.serviceCategory.avatarUrl}
             serviceName={service.name}
+            serviceId={service.id}
           />
         ))}
       </Grid>
 
       <Grid container item justifyContent="center" marginTop={3}>
-        <Button variant="outlined">Ver todos os serviços</Button>
+        <Link href="/services">
+          <Button variant="outlined">Ver todos os serviços</Button>
+        </Link>
       </Grid>
 
       <Text

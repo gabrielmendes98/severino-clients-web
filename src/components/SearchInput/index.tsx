@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from 'react';
+import { Fragment, SyntheticEvent, useEffect, useMemo } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -12,12 +12,14 @@ interface Props {
   onChange: (value: string) => any;
   options?: SelectOptions;
   loading?: boolean;
+  onOptionSelect?: (option: SelectOption) => any;
 }
 
 const SearchInput = ({
   placeholder,
   maxWidth,
   onChange,
+  onOptionSelect,
   options = [],
   loading,
 }: Props) => {
@@ -27,12 +29,25 @@ const SearchInput = ({
     [],
   );
 
+  const opOptionSelectHandler = (
+    event: SyntheticEvent<Element, Event>,
+    option: SelectOption | null | string,
+  ) => {
+    if (onOptionSelect && option) {
+      onOptionSelect(option as SelectOption);
+    }
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => () => onValueChange.cancel(), []);
+
   return (
     <Autocomplete
       id="search-input"
       onInputChange={onValueChange}
       freeSolo
-      options={options.map(option => option.label)}
+      options={options}
+      onChange={opOptionSelectHandler}
       fullWidth
       sx={{
         maxWidth,
