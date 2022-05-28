@@ -1,17 +1,18 @@
 import { ReactNode } from 'react';
-import Box from '@mui/material/Box';
 import Header from 'components/Header';
-import { Main } from './styles';
+import Footer from 'components/Footer';
+import { Main, Container } from './styles';
 
 interface Props {
   children: ReactNode;
 }
 
 const MainLayout = ({ children }: Props) => (
-  <Box>
+  <Container>
     <Header />
     <Main component="main">{children}</Main>
-  </Box>
+    <Footer />
+  </Container>
 );
 
 export default MainLayout;
