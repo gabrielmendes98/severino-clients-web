@@ -1,6 +1,6 @@
 import { baseApi } from './apis';
 
-const parseParams = ({ sort, ...other }: { sort: string }) => {
+export const parseParams = ({ sort, ...other }: { sort: string }) => {
   let params = {};
 
   if (sort) {
@@ -9,5 +9,3 @@ const parseParams = ({ sort, ...other }: { sort: string }) => {
 
   return { ...params, ...other };
 };
-
-export { parseParams };

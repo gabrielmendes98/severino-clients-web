@@ -29,7 +29,7 @@ const Home: NextPage = () => {
         align="center"
         fontWeight="bold"
         color="secondary"
-        marginTop={12}
+        marginTop={6}
         marginBottom={6}
       >
         Resolva seus problemas de maneira rápida e fácil

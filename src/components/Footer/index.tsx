@@ -20,7 +20,6 @@ const Footer = () => (
       backgroundColor: theme => theme.palette.bw.main,
       border: '1px solid rgba(0, 0, 0, 0.12)',
       padding: theme => theme.spacing(8),
-      marginTop: theme => theme.spacing(6),
     }}
   >
     <Grid container item sm={12} md={4} spacing={3}>

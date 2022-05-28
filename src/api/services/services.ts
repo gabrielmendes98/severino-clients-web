@@ -7,7 +7,7 @@ const servicesEndpoints = {
   searchWorkers: (id: string) => `/services/${id}`,
 };
 
-const servicesService = {
+export const servicesService = {
   listMostSearched: () =>
     baseApi.get<Service[], Service[]>(servicesEndpoints.listMostSearched),
   search: (value: string) =>
@@ -19,5 +19,4 @@ const servicesService = {
   //   }),
 };
 
-export { servicesEndpoints };
 export default servicesService;
