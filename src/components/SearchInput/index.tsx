@@ -41,11 +41,11 @@ const SearchInput = ({
         <TextField
           {...params}
           sx={{
-            backgroundColor: theme => theme.palette.white.main,
+            backgroundColor: theme => theme.palette.bw.main,
           }}
           size="small"
           placeholder={placeholder}
-          color="white"
+          color="bw"
           focused
           InputProps={{
             ...params.InputProps,

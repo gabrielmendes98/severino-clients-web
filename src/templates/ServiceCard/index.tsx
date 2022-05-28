@@ -19,7 +19,7 @@ const ServiceCard = ({ serviceAvatar, serviceName }: Props) => (
         height={theme.spacing(12)}
       />
     </Paper>
-    <Text color="GrayText" align="center" fontWeight="500" marginTop={1}>
+    <Text color="text.secondary" align="center" fontWeight="500" marginTop={1}>
       {serviceName}
     </Text>
   </Container>

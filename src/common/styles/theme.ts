@@ -12,12 +12,13 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
-    white: {
+    bw: {
       main: '#FFFFFF',
       contrastText: '#000',
     },
     background: {
       default: '#F0F0F0',
+      paper: '#FFFFFF',
     },
   },
   typography: {

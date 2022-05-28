@@ -44,7 +44,7 @@ const Home: NextPage = () => {
 
       <Text
         variant="h6"
-        color="GrayText"
+        color="text.secondary"
         fontWeight="bold"
         marginTop={10}
         marginBottom={3}
@@ -68,7 +68,7 @@ const Home: NextPage = () => {
 
       <Text
         variant="h6"
-        color="GrayText"
+        color="text.secondary"
         align="center"
         fontWeight="bold"
         marginTop={10}

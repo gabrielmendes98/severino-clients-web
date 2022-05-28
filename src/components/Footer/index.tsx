@@ -1,9 +1,11 @@
 import IconButton from '@mui/material/IconButton';
+import MuiLink from '@mui/material/Link';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import Image from 'next/image';
 import Box from '@mui/material/Box';
+import Link from 'next/link';
 import googlePlayBadge from 'assets/googlePlayBadge.png';
 import appStoreBadge from 'assets/appStoreBadge.png';
 import { CONTACT_EMAIL } from 'common/constants';
@@ -15,7 +17,7 @@ const Footer = () => (
   <Grid
     container
     sx={{
-      backgroundColor: theme => theme.palette.white.main,
+      backgroundColor: theme => theme.palette.bw.main,
       border: '1px solid rgba(0, 0, 0, 0.12)',
       padding: theme => theme.spacing(8),
       marginTop: theme => theme.spacing(6),
@@ -70,15 +72,39 @@ const Footer = () => (
           </Grid>
 
           <Grid item xs={12}>
-            <Text>Quero ser prestador de serviços</Text>
+            <Link href="/">
+              <MuiLink
+                underline="none"
+                color="text.primary"
+                sx={{ cursor: 'pointer' }}
+              >
+                Quero ser prestador de serviços
+              </MuiLink>
+            </Link>
           </Grid>
 
           <Grid item xs={12}>
-            <Text>Sobre nós</Text>
+            <Link href="/">
+              <MuiLink
+                underline="none"
+                color="text.primary"
+                sx={{ cursor: 'pointer' }}
+              >
+                Sobre nós
+              </MuiLink>
+            </Link>
           </Grid>
 
           <Grid item xs={12}>
-            <Text>Termos e condições</Text>
+            <Link href="/">
+              <MuiLink
+                underline="none"
+                color="text.primary"
+                sx={{ cursor: 'pointer' }}
+              >
+                Termos e condições
+              </MuiLink>
+            </Link>
           </Grid>
         </Grid>
       </Box>
@@ -94,7 +120,13 @@ const Footer = () => (
           </Grid>
 
           <Grid item xs={12}>
-            <Text>{CONTACT_EMAIL}</Text>
+            <MuiLink
+              underline="none"
+              color="text.primary"
+              href={`mailto:${CONTACT_EMAIL}`}
+            >
+              {CONTACT_EMAIL}
+            </MuiLink>
           </Grid>
         </Grid>
       </Box>

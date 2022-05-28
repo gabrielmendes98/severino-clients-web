@@ -6,7 +6,7 @@ import Logo from 'components/Logo';
 import Button from 'components/Button';
 
 const Header = () => (
-  <AppBar position="static" color="white" variant="outlined" elevation={0}>
+  <AppBar position="static" color="inherit" variant="outlined" elevation={0}>
     <Toolbar>
       <Link href="/">
         <Box sx={{ cursor: 'pointer' }}>
