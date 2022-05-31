@@ -29,7 +29,7 @@ const SearchInput = ({
     [],
   );
 
-  const opOptionSelectHandler = (
+  const onOptionSelectHandler = (
     event: SyntheticEvent<Element, Event>,
     option: SelectOption | null | string,
   ) => {
@@ -47,7 +47,7 @@ const SearchInput = ({
       onInputChange={onValueChange}
       freeSolo
       options={options}
-      onChange={opOptionSelectHandler}
+      onChange={onOptionSelectHandler}
       fullWidth
       sx={{
         maxWidth,
