@@ -29,10 +29,11 @@ const createApi = (
 
   axiosApi.get = customRequest;
   axiosApi.post = (path, data, postConfig) =>
-    customRequest(path, { data, ...postConfig });
+    customRequest(path, { data, method: 'post', ...postConfig });
   axiosApi.put = (path, data, postConfig) =>
-    customRequest(path, { data, ...postConfig });
-  axiosApi.delete = customRequest;
+    customRequest(path, { data, method: 'put', ...postConfig });
+  axiosApi.delete = (path, options) =>
+    customRequest(path, { method: 'delete', ...options });
 
   return axiosApi;
 };

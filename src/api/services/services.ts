@@ -1,17 +1,20 @@
 // import { parseParams } from '../utils';
 import { baseApi } from '../apis';
 
-const servicesEndpoints = {
+export const servicesEndpoints = {
   listMostSearched: '/services/most-searched',
+  list: '/services',
   search: (service: string) => `/services?search=${service}`,
   searchWorkers: (id: string) => `/services/${id}`,
 };
 
-export const servicesService = {
+const servicesService = {
   listMostSearched: () =>
     baseApi.get<Service[], Service[]>(servicesEndpoints.listMostSearched),
   search: (value: string) =>
     baseApi.get<Service[], Service[]>(servicesEndpoints.search(value)),
+  list: (params: ListParams) =>
+    baseApi.get<ServiceList, ServiceList>(servicesEndpoints.list, { params }),
   // searchWorkers: (id, params) =>
   //   baseApi.get(servicesEndpoints.searchWorkers(id), {
   //     needLocation: true,

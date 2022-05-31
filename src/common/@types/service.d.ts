@@ -1,7 +1,13 @@
 interface Service {
-  id: string;
   name: string;
-  serviceCategory: {
-    avatarUrl: string;
-  };
+  serviceCategoryName: string;
+  avatarUrl: string;
+  serviceCategoryId: string;
+  id: string;
+}
+
+interface ServiceList {
+  services: Service[];
+  total: number;
+  hasNext: boolean;
 }

@@ -62,7 +62,7 @@ const Home: NextPage = () => {
         {services.map(service => (
           <ServiceCard
             key={service.id}
-            serviceAvatar={service.serviceCategory.avatarUrl}
+            serviceAvatar={service.avatarUrl}
             serviceName={service.name}
             serviceId={service.id}
           />

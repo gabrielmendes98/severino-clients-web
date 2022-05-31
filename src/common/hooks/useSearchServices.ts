@@ -11,7 +11,7 @@ const useSearchServices = () => {
     if (serviceName) {
       servicesService
         .search(serviceName)
-        .then(response => parseToSelect(response, 'serviceName', 'serviceId'))
+        .then(response => parseToSelect(response, 'name', 'id'))
         .then(setSearchedServices)
         .then(() => setLoading(false));
     } else {
