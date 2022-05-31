@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import useServices from 'common/hooks/useServices';
+import usePagination from 'common/hooks/usePagination';
 import ServiceCard from 'templates/ServiceCard';
 import Grid from 'components/Grid';
 import SearchInput from 'components/SearchInput';
 import Title from 'components/Title';
+import Pagination from 'components/Pagination';
 
 const Services = () => {
-  const [page, setPage] = useState(0);
+  const { page, handlePageChange } = usePagination();
   const { loading, searchServices, servicesList, listServices } = useServices();
 
   useEffect(() => {
     const params = {
       page,
-      count: 3,
     };
     listServices(params);
   }, [listServices, page]);
@@ -43,6 +44,14 @@ const Services = () => {
             />
           </Grid>
         ))}
+      </Grid>
+
+      <Grid container justifyContent="center" marginTop={3}>
+        <Pagination
+          total={servicesList?.total}
+          page={page}
+          onChange={handlePageChange}
+        />
       </Grid>
     </Grid>
   );

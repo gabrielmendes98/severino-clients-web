@@ -1,4 +1,5 @@
 // import { parseParams } from '../utils';
+import { prepareListParams } from 'api/util';
 import { baseApi } from '../apis';
 
 export const servicesEndpoints = {
@@ -14,7 +15,9 @@ const servicesService = {
   search: (value: string) =>
     baseApi.get<Service[], Service[]>(servicesEndpoints.search(value)),
   list: (params: ListParams) =>
-    baseApi.get<ServiceList, ServiceList>(servicesEndpoints.list, { params }),
+    baseApi.get<ServiceList, ServiceList>(servicesEndpoints.list, {
+      params: prepareListParams(params),
+    }),
   // searchWorkers: (id, params) =>
   //   baseApi.get(servicesEndpoints.searchWorkers(id), {
   //     needLocation: true,

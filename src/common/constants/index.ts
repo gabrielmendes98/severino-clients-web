@@ -3,3 +3,5 @@ export const API_ERRORS = {
 };
 
 export const CONTACT_EMAIL = 'suporte@severino.com';
+
+export const DEFAULT_LIST_COUNT = 3;
