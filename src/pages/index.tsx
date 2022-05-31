@@ -10,12 +10,13 @@ import Button from 'components/Button';
 import Text from 'components/Text';
 import SearchInput from 'components/SearchInput';
 import Grid from 'components/Grid';
+import Skeleton from 'components/Skeleton';
 import { infoDoodles } from './utils';
 import { DoodleImage } from './styles';
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const [services, setServices] = useState<Service[]>([]);
+  const [services, setServices] = useState<Service[]>();
   const { loading, searchServices, searchedServices } = useSearchServices();
 
   useEffect(() => {
@@ -58,16 +59,24 @@ const Home: NextPage = () => {
         Escolha o serviço que você precisa
       </Text>
 
-      <Grid container justifyContent="space-around">
-        {services.map(service => (
-          <ServiceCard
-            key={service.id}
-            serviceAvatar={service.avatarUrl}
-            serviceName={service.name}
-            serviceId={service.id}
-          />
-        ))}
-      </Grid>
+      <Skeleton
+        ready={Boolean(services)}
+        count={9}
+        spacing={4}
+        SkeletonItem={{ width: 14, height: 14, variant: 'rectangular' }}
+      >
+        <Grid container justifyContent="space-around">
+          {services?.map(service => (
+            <Grid item key={service.id}>
+              <ServiceCard
+                serviceAvatar={service.avatarUrl}
+                serviceName={service.name}
+                serviceId={service.id}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Skeleton>
 
       <Grid container item justifyContent="center" marginTop={3}>
         <Link href="/services">

@@ -6,6 +6,7 @@ import Grid from 'components/Grid';
 import SearchInput from 'components/SearchInput';
 import Title from 'components/Title';
 import Pagination from 'components/Pagination';
+import Skeleton from 'components/Skeleton';
 
 const Services = () => {
   const { page, handlePageChange } = usePagination();
@@ -35,15 +36,22 @@ const Services = () => {
       </Grid>
 
       <Grid container spacing={4} marginTop={5}>
-        {servicesList?.services.map(service => (
-          <Grid item key={service.id}>
-            <ServiceCard
-              serviceAvatar={service.avatarUrl}
-              serviceName={service.name}
-              serviceId={service.id}
-            />
-          </Grid>
-        ))}
+        <Skeleton
+          ready={Boolean(servicesList)}
+          count={18}
+          spacing={4}
+          SkeletonItem={{ width: 14, height: 14, variant: 'rectangular' }}
+        >
+          {servicesList?.services.map(service => (
+            <Grid item key={service.id}>
+              <ServiceCard
+                serviceAvatar={service.avatarUrl}
+                serviceName={service.name}
+                serviceId={service.id}
+              />
+            </Grid>
+          ))}
+        </Skeleton>
       </Grid>
 
       <Grid container justifyContent="center" marginTop={3}>
