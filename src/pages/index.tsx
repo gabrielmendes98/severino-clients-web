@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import servicesService from 'api/services/services';
-import useSearchServices from 'common/hooks/useSearchServices';
+import useSearchServices from 'pages/useSearchServices';
 import ServiceCard from 'templates/ServiceCard';
 import Button from 'components/Button';
 import Text from 'components/Text';

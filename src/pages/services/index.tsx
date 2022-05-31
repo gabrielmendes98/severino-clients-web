@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import useServices from 'common/hooks/useServices';
 import usePagination from 'common/hooks/usePagination';
+import useServices from 'pages/services/useServices';
 import ServiceCard from 'templates/ServiceCard';
 import Grid from 'components/Grid';
 import SearchInput from 'components/SearchInput';
