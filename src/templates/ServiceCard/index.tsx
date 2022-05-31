@@ -1,5 +1,5 @@
 import Paper from '@mui/material/Paper';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import theme from 'common/styles/theme';
 import Image from 'components/Image';
 import Text from 'components/Text';
@@ -11,9 +11,19 @@ interface Props {
   serviceId: string;
 }
 
-const ServiceCard = ({ serviceAvatar, serviceName, serviceId }: Props) => (
-  <Link href={`/services/${serviceId}`}>
-    <Container>
+const ServiceCard = ({ serviceAvatar, serviceName, serviceId }: Props) => {
+  const router = useRouter();
+
+  const handleClick = () =>
+    router.push({
+      pathname: `/services/${serviceId}`,
+      query: {
+        serviceName,
+      },
+    });
+
+  return (
+    <Container onClick={handleClick}>
       <Paper sx={{ margin: 'auto', padding: theme => theme.spacing(1.5) }}>
         <Image
           src={serviceAvatar}
@@ -31,7 +41,7 @@ const ServiceCard = ({ serviceAvatar, serviceName, serviceId }: Props) => (
         {serviceName}
       </Text>
     </Container>
-  </Link>
-);
+  );
+};
 
 export default ServiceCard;
