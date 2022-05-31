@@ -19,6 +19,14 @@ const Home: NextPage = () => {
   const [services, setServices] = useState<Service[]>();
   const { loading, searchServices, searchedServices } = useSearchServices();
 
+  const onSearchOptionSelect = (option: SelectOption) =>
+    router.push({
+      pathname: `/services/${option.value}`,
+      query: {
+        serviceName: option.label,
+      },
+    });
+
   useEffect(() => {
     servicesService.listMostSearched().then(setServices);
   }, []);
@@ -43,9 +51,7 @@ const Home: NextPage = () => {
           onChange={searchServices}
           options={searchedServices}
           loading={loading}
-          onOptionSelect={(option: SelectOption) =>
-            router.push(`/services/${option.value}`)
-          }
+          onOptionSelect={onSearchOptionSelect}
         />
       </Grid>
 
