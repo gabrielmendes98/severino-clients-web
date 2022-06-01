@@ -8,6 +8,7 @@ import FilterContent, { FilterValues } from './Filter';
 const ServiceById = () => {
   const [filter, setFilter] = useState<FilterValues>({
     orderBy: '',
+    cityId: '',
   });
   const router = useRouter();
 

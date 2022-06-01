@@ -12,7 +12,7 @@ interface Props {
   onChange: (value: string) => any;
   options?: SelectOptions;
   loading?: boolean;
-  onOptionSelect?: (option: SelectOption) => any;
+  onOptionSelect: (option: SelectOption) => any;
 }
 
 const SearchInput = ({
@@ -27,8 +27,8 @@ const SearchInput = ({
     id="search-input"
     placeholder={placeholder}
     maxWidth={maxWidth}
-    onChange={onChange}
-    onOptionSelect={onOptionSelect}
+    onChange={(e, value) => onChange(value)}
+    onOptionSelect={(e, option) => onOptionSelect(option)}
     options={options}
     InputProps={{
       startAdornment: (

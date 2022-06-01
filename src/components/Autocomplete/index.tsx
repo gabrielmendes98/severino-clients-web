@@ -1,20 +1,20 @@
-import { Fragment, SyntheticEvent, useEffect, useMemo } from 'react';
+import { SyntheticEvent, useEffect, useMemo } from 'react';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { InputProps } from '@mui/material/Input';
 import MuiAutocomplete from '@mui/material/Autocomplete';
-import InputAdornment from '@mui/material/InputAdornment';
-import SearchIcon from '@mui/icons-material/Search';
 import debounce from 'lodash.debounce';
-import Loader from 'components/Loader';
 
 interface Props {
   id?: string;
   placeholder?: string;
   maxWidth?: number;
-  onChange: (value: string) => any;
+  onChange: (event: SyntheticEvent<Element, Event>, value: string) => any;
   options?: SelectOptions;
   loading?: boolean;
-  onOptionSelect?: (option: SelectOption) => any;
+  onOptionSelect?: (
+    event: SyntheticEvent<Element, Event>,
+    option: SelectOption,
+  ) => any;
   InputProps?: InputProps;
   TextFieldProps?: TextFieldProps;
   name?: string;
@@ -31,8 +31,8 @@ const Autocomplete = ({
   TextFieldProps,
   name,
 }: Props) => {
-  const onValueChange = useMemo(
-    () => debounce((e, value) => onChange(value), 500),
+  const onType = useMemo(
+    () => debounce((e, value) => onChange(e, value), 500),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
@@ -42,17 +42,18 @@ const Autocomplete = ({
     option: SelectOption | null | string,
   ) => {
     if (onOptionSelect && option) {
-      onOptionSelect(option as SelectOption);
+      (event.target as any).name = name;
+      onOptionSelect(event, option as SelectOption);
     }
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => () => onValueChange.cancel(), []);
+  useEffect(() => () => onType.cancel(), []);
 
   return (
     <MuiAutocomplete
-      id={id}
-      onInputChange={onValueChange}
+      id={id || name}
+      onInputChange={onType}
       freeSolo
       options={options}
       onChange={onOptionSelectHandler}
