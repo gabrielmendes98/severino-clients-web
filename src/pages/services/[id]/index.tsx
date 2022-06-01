@@ -8,9 +8,10 @@ import FilterContent, { FilterValues } from './Filter';
 const ServiceById = () => {
   const [filter, setFilter] = useState<FilterValues>({
     orderBy: '',
-    cityId: '',
   });
   const router = useRouter();
+
+  console.log(filter);
 
   return (
     <Grid container>

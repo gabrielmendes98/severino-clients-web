@@ -33,12 +33,7 @@ const RadioGroup = ({
 
   return (
     <FormControl>
-      <FormLabel
-        id={id || name}
-        sx={{ fontWeight: 'bold', color: theme => theme.palette.text.primary }}
-      >
-        {label}
-      </FormLabel>
+      <FormLabel id={id || name}>{label}</FormLabel>
       <MuiRadioGroup
         aria-labelledby={id || name}
         name={name}

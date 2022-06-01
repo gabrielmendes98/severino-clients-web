@@ -18,6 +18,7 @@ interface Props {
   InputProps?: InputProps;
   TextFieldProps?: TextFieldProps;
   name?: string;
+  disableClearable?: boolean;
 }
 
 const Autocomplete = ({
@@ -30,6 +31,7 @@ const Autocomplete = ({
   InputProps,
   TextFieldProps,
   name,
+  disableClearable = false,
 }: Props) => {
   const onType = useMemo(
     () => debounce((e, value) => onChange(e, value), 500),
@@ -61,6 +63,7 @@ const Autocomplete = ({
       sx={{
         maxWidth,
       }}
+      disableClearable={disableClearable}
       renderInput={params => (
         <TextField
           {...params}
