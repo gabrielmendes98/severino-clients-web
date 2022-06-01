@@ -14,7 +14,6 @@ const useServices = () => {
         setLoading(false);
       });
     } else {
-      console.log(cache.current);
       setServicesList(cache.current);
       setLoading(false);
     }
