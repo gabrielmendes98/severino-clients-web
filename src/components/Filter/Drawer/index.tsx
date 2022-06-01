@@ -1,14 +1,14 @@
 import { DrawerProps } from '@mui/material/Drawer';
-import { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import { Dispatch, FunctionComponent, ReactNode, SetStateAction } from 'react';
 import Text from 'components/Text';
 import { StyledDrawer } from './styles';
 
 interface Props extends DrawerProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
-  content: FunctionComponent;
+  content: ReactNode;
 }
 
-const Drawer = ({ open, setOpen, content: Content, ...props }: Props) => (
+const Drawer = ({ open, setOpen, content, ...props }: Props) => (
   <StyledDrawer
     anchor="right"
     open={open}
@@ -18,7 +18,7 @@ const Drawer = ({ open, setOpen, content: Content, ...props }: Props) => (
     <Text color="secondary" fontWeight="bold" marginBottom={3}>
       Filtros
     </Text>
-    <Content />
+    {content}
   </StyledDrawer>
 );
 

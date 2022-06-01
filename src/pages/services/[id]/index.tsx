@@ -1,11 +1,17 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Grid from 'components/Grid';
 import Title from 'components/Title';
 import Filter from 'components/Filter';
-import FilterContent from './Filter';
+import FilterContent, { FilterValues } from './Filter';
 
 const ServiceById = () => {
+  const [filter, setFilter] = useState<FilterValues>({
+    orderBy: '',
+  });
   const router = useRouter();
+
+  console.log(filter);
 
   return (
     <Grid container>
@@ -15,7 +21,11 @@ const ServiceById = () => {
         </Grid>
 
         <Grid container item xs={6} justifyContent="flex-end">
-          <Filter content={FilterContent} />
+          <Filter
+            content={FilterContent}
+            filter={filter}
+            setFilter={setFilter}
+          />
         </Grid>
       </Grid>
     </Grid>

@@ -17,6 +17,7 @@ interface Props {
   onOptionSelect?: (option: SelectOption) => any;
   InputProps?: InputProps;
   TextFieldProps?: TextFieldProps;
+  name?: string;
 }
 
 const Autocomplete = ({
@@ -28,6 +29,7 @@ const Autocomplete = ({
   options = [],
   InputProps,
   TextFieldProps,
+  name,
 }: Props) => {
   const onValueChange = useMemo(
     () => debounce((e, value) => onChange(value), 500),
@@ -67,6 +69,7 @@ const Autocomplete = ({
             ...params.InputProps,
             ...InputProps,
           }}
+          name={name}
           {...TextFieldProps}
         />
       )}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Radio from '@mui/material/Radio';
 import MuiRadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -10,17 +10,24 @@ interface Props {
   name: string;
   id?: string;
   options: SelectOptions;
-  onChange?: (value: string) => any;
+  onChange?: OnFieldChange;
+  value?: any;
+  showNone?: boolean;
 }
 
-const RadioGroup = ({ label, name, id, options, onChange }: Props) => {
-  const [value, setValue] = useState('');
-
+const RadioGroup = ({
+  label,
+  name,
+  id,
+  options,
+  onChange,
+  showNone,
+  value = '',
+}: Props) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedValue = (event.target as HTMLInputElement).value;
-    setValue(selectedValue);
     if (onChange) {
-      onChange(selectedValue);
+      onChange(event, selectedValue);
     }
   };
 
@@ -38,6 +45,14 @@ const RadioGroup = ({ label, name, id, options, onChange }: Props) => {
         value={value}
         onChange={handleChange}
       >
+        {showNone && (
+          <FormControlLabel
+            key="none"
+            value=""
+            control={<Radio />}
+            label="Nenhum"
+          />
+        )}
         {options.map(option => (
           <FormControlLabel
             key={option.value}
