@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Header from 'components/Header';
+import Header from 'templates/Header';
 import Footer from 'components/Footer';
 import { Main, Container } from './styles';
 
