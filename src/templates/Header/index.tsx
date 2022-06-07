@@ -14,6 +14,10 @@ const Header = ({ showModal }: Props) => {
   const handleLocationClick = () =>
     showModal({
       body: Location,
+      ModalProps: {
+        maxWidth: 'sm',
+        fullWidth: true,
+      },
     });
 
   return (

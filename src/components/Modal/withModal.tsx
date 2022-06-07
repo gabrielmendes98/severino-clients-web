@@ -6,10 +6,12 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { DialogProps } from '@mui/material/Dialog';
 import Modal from './index';
 
 interface ModalConfig {
   body: FunctionComponent;
+  ModalProps?: Omit<DialogProps, 'open'>;
 }
 
 export interface InjectedModalProps {
@@ -39,7 +41,7 @@ const withModal =
       <>
         <Component {...(props as T)} showModal={showModal} />
 
-        <Modal open={open} onClose={handleClose}>
+        <Modal {...config.ModalProps} open={open} onClose={handleClose}>
           <Body />
         </Modal>
       </>

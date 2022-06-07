@@ -46,12 +46,20 @@ const Home: NextPage = () => {
 
       <Grid container item justifyContent="center">
         <SearchInput
+          id="search-input"
           placeholder="Buscar serviços"
           maxWidth={1000}
           onChange={searchServices}
           options={searchedServices}
           loading={loading}
           onOptionSelect={onSearchOptionSelect}
+          TextFieldProps={{
+            sx: {
+              backgroundColor: theme => theme.palette.bw.main,
+            },
+            color: 'bw',
+            focused: true,
+          }}
         />
       </Grid>
 
