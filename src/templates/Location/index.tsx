@@ -4,13 +4,17 @@ import { useState } from 'react';
 import locationsService from 'api/services/locations';
 import locationDoodle from 'assets/locationDoodle.svg';
 import { parseLocationsToSelect, parseToSelect } from 'common/utils/parsers';
+import { useDispatch } from 'common/store/hooks';
+import { add } from 'common/slices/location';
 import Stack from 'components/Stack';
 import Text from 'components/Text';
 import SearchInput from 'components/SearchInput';
 import Button from 'components/Button';
 import Box from 'components/Box';
+import { InjectedModalProps } from 'components/Modal/withModal';
 
-const Location = () => {
+const Location = ({ closeModal }: InjectedModalProps) => {
+  const dispatch = useDispatch();
   const [cities, setCities] = useState<SelectOptions>([]);
   const [selectedCity, setSelectedCity] = useState<{
     id: string;
@@ -30,6 +34,11 @@ const Location = () => {
 
   const handleOptionSelect = (option: SelectOption) =>
     setSelectedCity({ id: option.value, name: option.label });
+
+  const handleConfirmLocation = () => {
+    dispatch(add(selectedCity!));
+    closeModal();
+  };
 
   return (
     <Stack spacing={3}>
@@ -64,7 +73,9 @@ const Location = () => {
 
       {Boolean(selectedCity) && (
         <Box display="flex" justifyContent="flex-end">
-          <Button variant="contained">Confirmar</Button>
+          <Button variant="contained" onClick={handleConfirmLocation}>
+            Confirmar
+          </Button>
         </Box>
       )}
     </Stack>

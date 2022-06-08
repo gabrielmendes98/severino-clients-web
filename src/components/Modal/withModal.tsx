@@ -9,13 +9,13 @@ import {
 import { DialogProps } from '@mui/material/Dialog';
 import Modal from './index';
 
-interface ModalConfig {
-  body: FunctionComponent;
-  ModalProps?: Omit<DialogProps, 'open'>;
-}
-
 export interface InjectedModalProps {
   showModal: (config: ModalConfig) => void;
+  closeModal: () => void;
+}
+interface ModalConfig {
+  body: FunctionComponent<InjectedModalProps>;
+  ModalProps?: Omit<DialogProps, 'open'>;
 }
 
 const DefaultBody = () => <></>;
@@ -30,7 +30,7 @@ const withModal =
 
     const Body = useMemo(() => config.body, [config.body]);
 
-    const handleClose = useCallback(() => setOpen(false), []);
+    const closeModal = useCallback(() => setOpen(false), []);
 
     const showModal = useCallback((config: ModalConfig) => {
       setConfig(config);
@@ -39,10 +39,14 @@ const withModal =
 
     return (
       <>
-        <Component {...(props as T)} showModal={showModal} />
+        <Component
+          {...(props as T)}
+          showModal={showModal}
+          closeModal={closeModal}
+        />
 
-        <Modal {...config.ModalProps} open={open} onClose={handleClose}>
-          <Body />
+        <Modal {...config.ModalProps} open={open} onClose={closeModal}>
+          <Body showModal={showModal} closeModal={closeModal} />
         </Modal>
       </>
     );
