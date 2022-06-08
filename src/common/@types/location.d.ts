@@ -1,4 +1,4 @@
-type Location = {
+type SeverinoLocation = {
   id: string;
   name: string;
   stateId: string;

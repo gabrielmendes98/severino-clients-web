@@ -6,7 +6,9 @@ export const locationsEndpoints = {
 
 const locationsService = {
   search: (cityName: string) =>
-    baseApi.get<Location[], Location[]>(locationsEndpoints.search(cityName)),
+    baseApi.get<SeverinoLocation[], SeverinoLocation[]>(
+      locationsEndpoints.search(cityName),
+    ),
 };
 
 export default locationsService;

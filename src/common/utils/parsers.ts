@@ -7,3 +7,9 @@ export const parseToSelect = (
     label: option[labelMapper],
     value: option[valueMapper],
   }));
+
+export const parseLocationsToSelect = (locations: SeverinoLocation[]) =>
+  locations.map(location => ({
+    label: `${location.name}, ${location.state.acronym}`,
+    value: location.id,
+  }));

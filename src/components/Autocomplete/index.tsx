@@ -1,15 +1,17 @@
 import { SyntheticEvent, useEffect, useMemo } from 'react';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { InputProps } from '@mui/material/Input';
-import MuiAutocomplete from '@mui/material/Autocomplete';
+import MuiAutocomplete, {
+  AutocompleteProps as MuiAutocompleteProps,
+} from '@mui/material/Autocomplete';
 import debounce from 'lodash.debounce';
 
-interface Props {
+type Props = {
   id?: string;
   placeholder?: string;
   maxWidth?: number;
   onChange: (event: SyntheticEvent<Element, Event>, value: string) => any;
-  options?: SelectOptions;
+  options: SelectOptions;
   loading?: boolean;
   onOptionSelect?: (
     event: SyntheticEvent<Element, Event>,
@@ -19,9 +21,26 @@ interface Props {
   TextFieldProps?: TextFieldProps;
   name?: string;
   disableClearable?: boolean;
-}
+  freeSolo?: boolean;
+};
 
-const Autocomplete = ({
+interface AutocompleteProps<
+  T,
+  Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined,
+  FreeSolo extends boolean | undefined,
+> extends Omit<
+      MuiAutocompleteProps<T, Multiple, DisableClearable, FreeSolo>,
+      keyof Props | 'renderInput'
+    >,
+    Props {}
+
+const Autocomplete = <
+  T,
+  Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined,
+  FreeSolo extends boolean | undefined,
+>({
   id,
   placeholder,
   maxWidth,
@@ -32,7 +51,9 @@ const Autocomplete = ({
   TextFieldProps,
   name,
   disableClearable = false,
-}: Props) => {
+  freeSolo = true,
+  ...props
+}: AutocompleteProps<T, Multiple, DisableClearable, FreeSolo>) => {
   const onType = useMemo(
     () => debounce((e, value) => onChange(e, value), 500),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,9 +75,10 @@ const Autocomplete = ({
 
   return (
     <MuiAutocomplete
+      {...(props as any)}
       id={id || name}
       onInputChange={onType}
-      freeSolo
+      freeSolo={freeSolo}
       options={options}
       onChange={onOptionSelectHandler}
       fullWidth
