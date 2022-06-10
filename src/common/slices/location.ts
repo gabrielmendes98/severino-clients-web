@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
 import { RootState } from '../store/store';
 
 export interface LocationSate {
@@ -18,6 +19,12 @@ export const locationSlice = createSlice({
     add: (state, action: PayloadAction<LocationSate>) => {
       Object.assign(state, action.payload);
     },
+  },
+  extraReducers: {
+    [HYDRATE]: (state, { payload }) => ({
+      ...state,
+      ...payload.location,
+    }),
   },
 });
 

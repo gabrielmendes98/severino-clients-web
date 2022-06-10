@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import { store } from 'common/store/store';
+import { wrapper } from 'common/store/store';
 import ThemeProvider from 'common/providers/Theme';
 import createEmotionCache from 'common/styles/createEmotionCache';
 import MainLayout from 'components/Layouts/Main';
@@ -20,18 +20,16 @@ const MyApp = ({
   pageProps,
 }: MyAppProps) => (
   <CacheProvider value={emotionCache}>
-    <Provider store={store}>
-      <Head>
-        <title>Severino</title>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <ThemeProvider>
-        <MainLayout>
-          <Component {...pageProps} />
-        </MainLayout>
-      </ThemeProvider>
-    </Provider>
+    <Head>
+      <title>Severino</title>
+      <meta name="viewport" content="initial-scale=1, width=device-width" />
+    </Head>
+    <ThemeProvider>
+      <MainLayout>
+        <Component {...pageProps} />
+      </MainLayout>
+    </ThemeProvider>
   </CacheProvider>
 );
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
