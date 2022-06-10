@@ -7,6 +7,7 @@ import { parseLocationsToSelect, parseToSelect } from 'common/utils/parsers';
 import { useDispatch } from 'common/store/hooks';
 import { add } from 'common/slices/location';
 import { getPosition } from 'common/utils/location';
+import useFetch from 'common/hooks/useFetch';
 import Stack from 'components/Stack';
 import Text from 'components/Text';
 import SearchInput from 'components/SearchInput';
@@ -16,6 +17,8 @@ import { InjectedModalProps } from 'components/Modal/withModal';
 
 const Location = ({ closeModal }: InjectedModalProps) => {
   const dispatch = useDispatch();
+  const { request: reverseGeocoding, loading: loadingReverseGeocoding } =
+    useFetch(locationsService.reverseGeocoding);
   const [cities, setCities] = useState<SelectOptions>([]);
   const [selectedCity, setSelectedCity] = useState<{
     id: string;
@@ -44,7 +47,7 @@ const Location = ({ closeModal }: InjectedModalProps) => {
   const handleGeolocationClick = () => {
     getPosition().then(geocodeLocation => {
       if (geocodeLocation) {
-        locationsService.reverseGeocoding(geocodeLocation).then(location => {
+        reverseGeocoding(geocodeLocation).then(location => {
           dispatch(
             add({
               id: location.id,
@@ -85,6 +88,7 @@ const Location = ({ closeModal }: InjectedModalProps) => {
         }}
         size="large"
         onClick={handleGeolocationClick}
+        loading={loadingReverseGeocoding}
       >
         Usar minha localização
       </Button>
