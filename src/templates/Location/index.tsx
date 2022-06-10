@@ -6,6 +6,7 @@ import locationDoodle from 'assets/locationDoodle.svg';
 import { parseLocationsToSelect, parseToSelect } from 'common/utils/parsers';
 import { useDispatch } from 'common/store/hooks';
 import { add } from 'common/slices/location';
+import { getPosition } from 'common/utils/location';
 import Stack from 'components/Stack';
 import Text from 'components/Text';
 import SearchInput from 'components/SearchInput';
@@ -40,6 +41,22 @@ const Location = ({ closeModal }: InjectedModalProps) => {
     closeModal();
   };
 
+  const handleGeolocationClick = () => {
+    getPosition().then(geocodeLocation => {
+      if (geocodeLocation) {
+        locationsService.reverseGeocoding(geocodeLocation).then(location => {
+          dispatch(
+            add({
+              id: location.id,
+              name: `${location.name}, ${location.state.acronym}`,
+            }),
+          );
+          closeModal();
+        });
+      }
+    });
+  };
+
   return (
     <Stack spacing={3}>
       <Image
@@ -67,6 +84,7 @@ const Location = ({ closeModal }: InjectedModalProps) => {
           paddingLeft: theme => theme.spacing(2),
         }}
         size="large"
+        onClick={handleGeolocationClick}
       >
         Usar minha localização
       </Button>
