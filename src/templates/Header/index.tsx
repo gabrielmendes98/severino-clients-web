@@ -4,8 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
-import { LocationSate, selectLocation } from 'common/slices/location';
-import { wrapper } from 'common/store/store';
+import { selectLocation } from 'common/slices/location';
 import { useSelector } from 'common/store/hooks';
 import Location from 'templates/Location';
 import Logo from 'components/Logo';
@@ -57,4 +56,4 @@ const Header = ({ showModal }: Props) => {
   );
 };
 
-export default Header;
+export default withModal(Header);
