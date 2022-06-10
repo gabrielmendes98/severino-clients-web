@@ -19,6 +19,9 @@ const Location = ({ closeModal }: InjectedModalProps) => {
   const dispatch = useDispatch();
   const { request: reverseGeocoding, loading: loadingReverseGeocoding } =
     useFetch(locationsService.reverseGeocoding);
+  const { request: searchLocation, loading: loadingSearchLocation } = useFetch(
+    locationsService.search,
+  );
   const [cities, setCities] = useState<SelectOptions>([]);
   const [selectedCity, setSelectedCity] = useState<{
     id: string;
@@ -30,8 +33,7 @@ const Location = ({ closeModal }: InjectedModalProps) => {
       setSelectedCity(null);
       return;
     }
-    locationsService
-      .search(value)
+    searchLocation(value)
       .then(response => parseLocationsToSelect(response))
       .then(setCities);
   };
@@ -78,6 +80,7 @@ const Location = ({ closeModal }: InjectedModalProps) => {
         onOptionSelect={handleOptionSelect}
         placeholder="Buscar cidade"
         options={cities}
+        loading={loadingSearchLocation}
       />
 
       <Button
