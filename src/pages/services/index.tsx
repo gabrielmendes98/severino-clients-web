@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import usePagination from 'common/hooks/usePagination';
 import useServices from 'pages/services/useServices';
 import ServiceCard from 'templates/ServiceCard';
@@ -10,7 +10,13 @@ import Skeleton from 'components/Skeleton';
 
 const Services = () => {
   const { page, handlePageChange } = usePagination();
-  const { loading, searchServices, servicesList, listServices } = useServices();
+  const {
+    loadingSearch,
+    searchServices,
+    servicesList,
+    listServices,
+    loadingList,
+  } = useServices();
 
   useEffect(() => {
     const params = {
@@ -30,14 +36,21 @@ const Services = () => {
           <SearchInput
             placeholder="Busque serviços"
             onChange={searchServices}
-            loading={loading}
+            loading={loadingSearch}
+            TextFieldProps={{
+              sx: {
+                backgroundColor: theme => theme.palette.bw.main,
+              },
+              color: 'bw',
+              focused: true,
+            }}
           />
         </Grid>
       </Grid>
 
       <Grid container spacing={4} marginTop={5}>
         <Skeleton
-          ready={Boolean(servicesList)}
+          ready={!loadingList}
           count={18}
           spacing={4}
           SkeletonItem={{ width: 14, height: 14, variant: 'rectangular' }}

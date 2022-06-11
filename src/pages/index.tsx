@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import servicesService from 'api/services/services';
-import useSearchServices from 'pages/useSearchServices';
+import useFetch from 'common/hooks/useFetch';
+import { parseToSelect } from 'common/utils/parsers';
 import ServiceCard from 'templates/ServiceCard';
 import Button from 'components/Button';
 import Text from 'components/Text';
@@ -17,7 +18,18 @@ import { DoodleImage } from './styles';
 const Home: NextPage = () => {
   const router = useRouter();
   const [services, setServices] = useState<Service[]>();
-  const { loading, searchServices, searchedServices } = useSearchServices();
+  const [searchedServices, setSearchedServices] = useState<SelectOptions>([]);
+  const { request: search, loading } = useFetch(servicesService.search);
+
+  const searchServices = (serviceName: string) => {
+    if (serviceName) {
+      search(serviceName)
+        .then(response => parseToSelect(response, 'name', 'id'))
+        .then(setSearchedServices);
+    } else {
+      setSearchedServices([]);
+    }
+  };
 
   const onSearchOptionSelect = (option: SelectOption) =>
     router.push({
