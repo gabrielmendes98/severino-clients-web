@@ -1,9 +1,9 @@
 import { useCallback, useState } from 'react';
 
-const useFetch = <T, R>(request: (...args: T[]) => Promise<R>) => {
+const useFetch = <T extends any[], R>(request: (...args: T) => Promise<R>) => {
   const [loading, setLoading] = useState(false);
 
-  const enhancedRequest = useCallback(async (...args: T[]) => {
+  const enhancedRequest = useCallback(async (...args: T) => {
     setLoading(true);
     return request(...args).then(response => {
       setLoading(false);
@@ -19,3 +19,5 @@ const useFetch = <T, R>(request: (...args: T[]) => Promise<R>) => {
 };
 
 export default useFetch;
+
+console.log();

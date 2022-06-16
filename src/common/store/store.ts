@@ -1,14 +1,41 @@
-import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import {
+  Action,
+  AnyAction,
+  configureStore,
+  Dispatch,
+  EnhancedStore,
+  Middleware,
+  MiddlewareArray,
+  ThunkAction,
+} from '@reduxjs/toolkit';
+import { ThunkMiddlewareFor } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
 import {
   nextReduxCookieMiddleware,
   wrapMakeStore,
 } from 'next-redux-cookie-wrapper';
 import { createWrapper } from 'next-redux-wrapper';
-import counterReducer from '../slices/counter';
-import locationReducer from '../slices/location';
+import counterReducer, { CounterState } from '../slices/counter';
+import locationReducer, { LocationSate } from '../slices/location';
 
-const makeStore = wrapMakeStore(() =>
-  configureStore({
+export let store: EnhancedStore<
+  {
+    counter: CounterState;
+    location: LocationSate;
+  },
+  AnyAction,
+  MiddlewareArray<
+    [
+      Middleware<{}, any, Dispatch<AnyAction>>,
+      ThunkMiddlewareFor<{
+        counter: CounterState;
+        location: LocationSate;
+      }>,
+    ]
+  >
+>;
+
+const makeStore = wrapMakeStore(() => {
+  store = configureStore({
     reducer: {
       counter: counterReducer,
       location: locationReducer,
@@ -19,8 +46,9 @@ const makeStore = wrapMakeStore(() =>
           subtrees: ['location'],
         }),
       ),
-  }),
-);
+  });
+  return store;
+});
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;
