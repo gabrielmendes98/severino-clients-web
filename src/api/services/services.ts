@@ -19,7 +19,7 @@ const servicesService = {
       params: prepareListParams(params),
     }),
   searchWorkers: (serviceId: string, params: ListParams) =>
-    baseApi.get<WorkerSummary[], WorkerSummary[]>(
+    baseApi.get<WorkerSummaryList, WorkerSummaryList>(
       servicesEndpoints.searchWorkers(serviceId),
       {
         params: addLocationParam(prepareListParams(params)),

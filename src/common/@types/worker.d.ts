@@ -31,3 +31,9 @@ interface WorkerSummary {
       }[]
     | [];
 }
+
+interface WorkerSummaryList {
+  workers: WorkerSummary[];
+  total: number;
+  hasNext: boolean;
+}

@@ -4,6 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import IconButton from 'components/IconButton';
@@ -34,6 +35,7 @@ const WorkerCard = ({
   whatsAppLink,
   hasWhatsapp,
 }: WorkerCardProps) => {
+  const router = useRouter();
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
 
   const handleFavoriteClick = () => {
@@ -41,11 +43,17 @@ const WorkerCard = ({
     setLocalIsFavorite(init => !init);
   };
 
+  const handleCardClick = () => {
+    router.push({
+      pathname: `/profile/${id}`,
+    });
+  };
+
   const splitName = name.split(' ');
   const textAvatar = (splitName[0][0] + splitName[1][0]).toUpperCase();
 
   return (
-    <Container>
+    <Container onClick={handleCardClick}>
       {avatarUrl ? (
         <Avatar src={avatarUrl} alt="Foto do profissional" />
       ) : (
