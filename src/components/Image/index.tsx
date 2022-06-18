@@ -1,5 +1,3 @@
-import { Interpolation, Theme } from '@mui/material';
-import NextImage, { ImageProps } from 'next/image';
 import { ClassAttributes, ImgHTMLAttributes } from 'react';
 
 interface Props

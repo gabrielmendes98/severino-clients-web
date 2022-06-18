@@ -1,5 +1,5 @@
 import { DrawerProps } from '@mui/material/Drawer';
-import { Dispatch, FunctionComponent, ReactNode, SetStateAction } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 import Text from 'components/Text';
 import { StyledDrawer } from './styles';
 

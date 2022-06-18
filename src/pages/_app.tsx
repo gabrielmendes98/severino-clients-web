@@ -1,4 +1,3 @@
-import { Provider } from 'react-redux';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import { CacheProvider, EmotionCache } from '@emotion/react';

@@ -1,8 +1,6 @@
-import { Fragment, SyntheticEvent, useEffect, useMemo } from 'react';
-import TextField, { TextFieldProps } from '@mui/material/TextField';
+import { TextFieldProps } from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-import debounce from 'lodash.debounce';
 import Loader from 'components/Loader';
 import Autocomplete from 'components/Autocomplete';
 

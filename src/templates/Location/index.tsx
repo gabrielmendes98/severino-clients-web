@@ -3,7 +3,7 @@ import MyLocation from '@mui/icons-material/MyLocation';
 import { useState } from 'react';
 import locationsService from 'api/services/locations';
 import locationDoodle from 'assets/locationDoodle.svg';
-import { parseLocationsToSelect, parseToSelect } from 'common/utils/parsers';
+import { parseLocationsToSelect } from 'common/utils/parsers';
 import { useDispatch } from 'common/store/hooks';
 import { add } from 'common/slices/location';
 import { getPosition } from 'common/utils/location';

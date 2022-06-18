@@ -1,10 +1,5 @@
-import { useState } from 'react';
-import locationsService from 'api/services/locations';
-import { parseToSelect } from 'common/utils/parsers';
-import Autocomplete from 'components/Autocomplete';
 import RadioGroup from 'components/Radio/RadioGroup';
 import Stack from 'components/Stack';
-import Text from 'components/Text';
 import { orderByOptions } from './utils';
 
 export type FilterValues = {
