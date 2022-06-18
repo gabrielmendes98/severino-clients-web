@@ -1,4 +1,3 @@
-// import { parseParams } from '../utils';
 import { addLocationParam, prepareListParams } from 'api/util';
 import { baseApi } from '../apis';
 
@@ -22,7 +21,9 @@ const servicesService = {
     baseApi.get<WorkerSummaryList, WorkerSummaryList>(
       servicesEndpoints.searchWorkers(serviceId),
       {
-        params: addLocationParam(prepareListParams(params)),
+        params: params.location
+          ? prepareListParams(params)
+          : addLocationParam(prepareListParams(params)),
       },
     ),
 };

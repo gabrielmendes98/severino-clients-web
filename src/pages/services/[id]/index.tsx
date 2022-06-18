@@ -2,8 +2,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { InferGetServerSidePropsType } from 'next';
 import servicesService from 'api/services/services';
-import { baseApi } from 'api/apis';
-import { prepareListParams } from 'api/util';
 import useFetch from 'common/hooks/useFetch';
 import { useSelector } from 'common/store/hooks';
 import { selectLocation } from 'common/slices/location';
@@ -50,8 +48,10 @@ const ServiceById = ({
       ...filter,
     };
     searchWorkers(String(router.query.id), params).then(response => {
-      const resultWorkers = parseWorkerSummaryToCard(response.workers);
-      setWorkersList({ ...response, workers: resultWorkers });
+      setWorkersList({
+        ...response,
+        workers: parseWorkerSummaryToCard(response.workers),
+      });
     });
   }, [router.query.id, searchWorkers, location.id, filter, page]);
 
@@ -100,33 +100,29 @@ const ServiceById = ({
 export const getServerSideProps = wrapper.getServerSideProps(
   store =>
     async ({ params, query }) => {
-      try {
-        const { id } = params as { id: string };
-        const { page, orderBy } = getPaginationFromQuery(query);
+      const { id } = params as { id: string };
+      const { page, orderBy, ...restQuery } = getPaginationFromQuery(query);
 
-        const data = await baseApi.get<WorkerSummaryList, WorkerSummaryList>(
-          `/services/${id}`,
-          {
-            params: prepareListParams({
-              page,
-              orderBy,
-              location: store.getState().location.id,
-            }),
-          },
-        );
+      const data = await servicesService
+        .searchWorkers(id, {
+          ...restQuery,
+          page,
+          orderBy,
+          location: store.getState().location.id,
+        })
+        .then(data => ({
+          ...data,
+          workers: parseWorkerSummaryToCard(data.workers),
+        }))
+        .catch(() => ({
+          workers: [],
+          total: 0,
+          hasNext: false,
+        }));
 
-        return {
-          props: { ...data, workers: parseWorkerSummaryToCard(data.workers) },
-        };
-      } catch (e) {
-        return {
-          props: {
-            workers: [],
-            total: 0,
-            hasNext: false,
-          },
-        };
-      }
+      return {
+        props: { ...data },
+      };
     },
 );
 
