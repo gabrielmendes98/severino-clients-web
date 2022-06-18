@@ -1,5 +1,6 @@
 interface ListParams {
-  sort?: string;
+  orderBy?: string;
   count?: number;
-  page: number;
+  page: number | string;
+  location?: string;
 }

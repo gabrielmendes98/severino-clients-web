@@ -1,10 +1,16 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { InferGetServerSidePropsType } from 'next';
 import servicesService from 'api/services/services';
+import { baseApi } from 'api/apis';
+import { prepareListParams } from 'api/util';
 import useFetch from 'common/hooks/useFetch';
 import { useSelector } from 'common/store/hooks';
 import { selectLocation } from 'common/slices/location';
 import usePagination from 'common/hooks/usePagination';
+import { wrapper } from 'common/store/store';
+import useEffectAfterFirstRender from 'common/hooks/useEffectAfterFirstRender';
+import { getPaginationFromQuery } from 'common/utils/pagination';
 import Filter from 'templates/Filter';
 import WorkerCard, { WorkerCardProps } from 'templates/WorkerCard';
 import { parseWorkerSummaryToCard } from 'templates/WorkerCard/utils';
@@ -14,8 +20,12 @@ import Pagination from 'components/Pagination';
 import Skeleton from 'components/Skeleton';
 import FilterContent, { FilterValues } from './Filter';
 
-const ServiceById = () => {
-  const { page, handlePageChange } = usePagination();
+const ServiceById = ({
+  workers,
+  total,
+  hasNext,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { page, handlePageChange } = usePagination(true);
   const location = useSelector(selectLocation);
   const [filter, setFilter] = useState<FilterValues>({
     orderBy: '',
@@ -24,13 +34,17 @@ const ServiceById = () => {
     workers: WorkerCardProps[];
     hasNext: boolean;
     total: number;
-  }>();
+  }>({
+    workers,
+    total,
+    hasNext,
+  });
   const router = useRouter();
   const { request: searchWorkers, loading } = useFetch(
     servicesService.searchWorkers,
   );
 
-  useEffect(() => {
+  useEffectAfterFirstRender(() => {
     let params = {
       page,
       ...filter,
@@ -64,7 +78,7 @@ const ServiceById = () => {
           spacing={4}
           SkeletonItem={{ width: 30, height: 40, variant: 'rectangular' }}
         >
-          {workersList?.workers.map(worker => (
+          {workersList.workers.map(worker => (
             <Grid container item key={worker.id} xs="auto">
               <WorkerCard {...worker} />
             </Grid>
@@ -82,5 +96,38 @@ const ServiceById = () => {
     </Grid>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  store =>
+    async ({ params, query }) => {
+      try {
+        const { id } = params as { id: string };
+        const { page, orderBy } = getPaginationFromQuery(query);
+
+        const data = await baseApi.get<WorkerSummaryList, WorkerSummaryList>(
+          `/services/${id}`,
+          {
+            params: prepareListParams({
+              page,
+              orderBy,
+              location: store.getState().location.id,
+            }),
+          },
+        );
+
+        return {
+          props: { ...data, workers: parseWorkerSummaryToCard(data.workers) },
+        };
+      } catch (e) {
+        return {
+          props: {
+            workers: [],
+            total: 0,
+            hasNext: false,
+          },
+        };
+      }
+    },
+);
 
 export default ServiceById;

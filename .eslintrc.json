@@ -7,6 +7,12 @@
   ],
   "plugins": ["import"],
   "rules": {
+    "react-hooks/exhaustive-deps": [
+      "warn",
+      {
+        "additionalHooks": "useEffectAfterFirstRender"
+      }
+    ],
     "import/no-unresolved": "error",
     "no-empty-function": [
       "error",
