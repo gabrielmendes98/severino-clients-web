@@ -6,6 +6,7 @@ import {
   useCallback,
 } from 'react';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import { useRouter } from 'next/router';
 import Button from 'components/Button';
 import Drawer from './Drawer';
 
@@ -20,6 +21,7 @@ const Filter = <FilterType extends {}>({
   setFilter,
   filter,
 }: Props<FilterType>) => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   const onFilterChange = useCallback<OnFieldChange>(
@@ -28,8 +30,19 @@ const Filter = <FilterType extends {}>({
         ...init,
         [e.target.name]: value,
       }));
+      router.push(
+        {
+          pathname: router.pathname,
+          query: {
+            ...router.query,
+            [e.target.name]: value,
+          },
+        },
+        {},
+        { shallow: true },
+      );
     },
-    [setFilter],
+    [setFilter, router],
   );
 
   return (
