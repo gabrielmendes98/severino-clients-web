@@ -1,11 +1,12 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import defaultsDeep from 'lodash.defaultsdeep';
+import { store } from 'common/store/store';
 import { handleError } from './interceptors';
 
 const getConfig = () => ({
   headers: {
     'Content-Type': 'application/json',
-    // Authorization: store.jwt,
+    Authorization: store ? `Bearer ${store.getState().user.token}` : '',
   },
   loader: true,
 });
