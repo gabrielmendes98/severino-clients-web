@@ -19,6 +19,8 @@
     "@reduxjs/toolkit": "^1.8.1",
     "@types/lodash.debounce": "^4.0.7",
     "axios": "^0.27.2",
+    "formik": "^2.2.9",
+    "jwt-decode": "^3.1.2",
     "lodash.debounce": "^4.0.8",
     "lodash.defaultsdeep": "^4.6.1",
     "next": "12.1.7-canary.4",
@@ -27,7 +29,8 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-redux": "^8.0.2",
-    "react-toastify": "^9.0.1"
+    "react-toastify": "^9.0.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/lodash.defaultsdeep": "^4.6.7",

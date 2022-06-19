@@ -6,20 +6,25 @@ import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
 import { selectLocation } from 'common/slices/location';
 import { useSelector } from 'common/store/hooks';
+import { selectUserIsSigned } from 'common/slices/user';
 import Location from 'templates/Location';
 import Logo from 'components/Logo';
 import Button from 'components/Button';
 import withModal, { InjectedModalProps } from 'components/Modal/withModal';
+import ProfileMenu from './ProfileMenu';
 
 interface Props extends InjectedModalProps {}
 
 const Header = ({ showModal }: Props) => {
   const location = useSelector(selectLocation);
+  const isSigned = useSelector(selectUserIsSigned);
   const [displayLocation, setDisplayLocation] = useState('');
+  const [clientIsSigned, setClientIsSigned] = useState(false);
 
   useEffect(() => {
     setDisplayLocation(location.name);
-  }, [location]);
+    setClientIsSigned(isSigned);
+  }, [location, isSigned]);
 
   const handleLocationClick = () =>
     showModal({
@@ -45,12 +50,24 @@ const Header = ({ showModal }: Props) => {
         <Link href="/services">
           <Button color="inherit">Contrate um serviço</Button>
         </Link>
-        <Link href="/sign-up">
-          <Button color="inherit">Criar conta</Button>
-        </Link>
-        <Link href="/login">
-          <Button color="inherit">Login</Button>
-        </Link>
+        {!clientIsSigned && (
+          <>
+            <Link href="/sign-up">
+              <Button color="inherit">Criar conta</Button>
+            </Link>
+            <Link href="/login">
+              <Button color="inherit">Login</Button>
+            </Link>
+          </>
+        )}
+        {clientIsSigned && (
+          <>
+            <Link href="/favorited">
+              <Button color="inherit">Meus favoritos</Button>
+            </Link>
+            <ProfileMenu />
+          </>
+        )}
       </Toolbar>
     </AppBar>
   );

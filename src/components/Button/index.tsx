@@ -10,7 +10,7 @@ interface Props extends ButtonProps {
 }
 
 const Button = (
-  { children, loading, startIcon, endIcon, size, ...props }: Props,
+  { children, loading, startIcon, endIcon, size = 'medium', ...props }: Props,
   ref: Ref<any>,
 ) => (
   <BaseButton

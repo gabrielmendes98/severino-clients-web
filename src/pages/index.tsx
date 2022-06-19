@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import servicesService from 'api/services/services';
 import useFetch from 'common/hooks/useFetch';
 import { parseToSelect } from 'common/utils/parsers';
+import { useSelector } from 'common/store/hooks';
+import { selectUser } from 'common/slices/user';
 import ServiceCard from 'templates/ServiceCard';
 import Button from 'components/Button';
 import Text from 'components/Text';
@@ -16,6 +18,8 @@ import { infoDoodles } from './utils';
 import { DoodleImage } from './styles';
 
 const Home: NextPage = () => {
+  const user = useSelector(selectUser);
+  console.log(user);
   const router = useRouter();
   const [services, setServices] = useState<Service[]>();
   const [searchedServices, setSearchedServices] = useState<SelectOptions>([]);

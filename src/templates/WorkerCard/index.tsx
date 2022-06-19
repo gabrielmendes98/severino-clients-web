@@ -102,7 +102,7 @@ const WorkerCard = ({
             <Text>|</Text>
 
             <a href={whatsAppLink!} target="_blank" rel="noreferrer">
-              <IconButton aria-label="favoritar">
+              <IconButton aria-label="whatsapp">
                 <WhatsAppIcon />
               </IconButton>
             </a>
