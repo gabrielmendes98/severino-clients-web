@@ -19,7 +19,6 @@ import { DoodleImage } from './styles';
 
 const Home: NextPage = () => {
   const user = useSelector(selectUser);
-  console.log(user);
   const router = useRouter();
   const [services, setServices] = useState<Service[]>();
   const [searchedServices, setSearchedServices] = useState<SelectOptions>([]);

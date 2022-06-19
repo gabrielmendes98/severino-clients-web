@@ -19,5 +19,3 @@ const useFetch = <T extends any[], R>(request: (...args: T) => Promise<R>) => {
 };
 
 export default useFetch;
-
-console.log();
