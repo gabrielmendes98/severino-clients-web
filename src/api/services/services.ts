@@ -11,8 +11,8 @@ export const servicesEndpoints = {
 const servicesService = {
   listMostSearched: () =>
     baseApi.get<Service[], Service[]>(servicesEndpoints.listMostSearched),
-  search: (value: string) =>
-    baseApi.get<Service[], Service[]>(servicesEndpoints.search(value)),
+  search: (service: string) =>
+    baseApi.get<Service[], Service[]>(servicesEndpoints.search(service)),
   list: (params: ListParams) =>
     baseApi.get<ServiceList, ServiceList>(servicesEndpoints.list, {
       params: prepareListParams(params),
@@ -21,9 +21,7 @@ const servicesService = {
     baseApi.get<WorkerSummaryList, WorkerSummaryList>(
       servicesEndpoints.searchWorkers(serviceId),
       {
-        params: params.location
-          ? prepareListParams(params)
-          : addLocationParam(prepareListParams(params)),
+        params: addLocationParam(prepareListParams(params)),
       },
     ),
 };

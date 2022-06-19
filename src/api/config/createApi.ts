@@ -6,7 +6,9 @@ import { handleError } from './interceptors';
 const getConfig = () => ({
   headers: {
     'Content-Type': 'application/json',
-    Authorization: store ? `Bearer ${store.getState().user.token}` : '',
+    Authorization: store?.getState().user.token
+      ? `Bearer ${store.getState().user.token}`
+      : '',
   },
   loader: true,
 });

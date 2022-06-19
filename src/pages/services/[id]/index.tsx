@@ -108,7 +108,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
           ...restQuery,
           page,
           orderBy,
-          location: store.getState().location.id,
         })
         .then(data => ({
           ...data,

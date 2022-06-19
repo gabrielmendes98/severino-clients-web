@@ -1,10 +1,11 @@
+import { MouseEvent, useState } from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useState } from 'react';
 import { useRouter } from 'next/router';
+import workersService from 'api/services/workers';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import IconButton from 'components/IconButton';
@@ -38,9 +39,12 @@ const WorkerCard = ({
   const router = useRouter();
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
 
-  const handleFavoriteClick = () => {
-    // call api
+  const handleFavoriteClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setLocalIsFavorite(init => !init);
+    workersService.favorite(id).catch(() => {
+      setLocalIsFavorite(init => !init);
+    });
   };
 
   const handleCardClick = () => {
@@ -101,7 +105,12 @@ const WorkerCard = ({
           <>
             <Text>|</Text>
 
-            <a href={whatsAppLink!} target="_blank" rel="noreferrer">
+            <a
+              href={whatsAppLink!}
+              target="_blank"
+              rel="noreferrer"
+              onClick={e => e.stopPropagation()}
+            >
               <IconButton aria-label="whatsapp">
                 <WhatsAppIcon />
               </IconButton>
