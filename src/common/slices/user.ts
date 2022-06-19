@@ -69,6 +69,16 @@ export const userSlice = createSlice({
       .addCase(signUp.rejected, state => {
         state.status = 'failed';
       })
+      .addCase(login.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        Object.assign(state, action.payload);
+        state.status = 'idle';
+      })
+      .addCase(login.rejected, state => {
+        state.status = 'failed';
+      })
       .addCase(HYDRATE, (state, { payload }: any) => ({
         ...state,
         ...payload.user,

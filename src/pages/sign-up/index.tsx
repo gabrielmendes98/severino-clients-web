@@ -6,6 +6,7 @@ import KeyIcon from '@mui/icons-material/Key';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import signUpDoodle from 'assets/user/signUpDoodle.svg';
+import toast from 'common/utils/toast';
 import { useDispatch, useSelector } from 'common/store/hooks';
 import { selectUserLoading, signUp } from 'common/slices/user';
 import Grid from 'components/Grid';
@@ -27,6 +28,7 @@ const SignUp = () => {
   const handleSubmit = (values: typeof initialValues) => {
     dispatch(signUp(values)).then(state => {
       if (state.meta.requestStatus !== 'rejected') {
+        toast.success('Bem-vindo(a) ao Severino');
         router.push('/');
       }
     });
@@ -57,60 +59,58 @@ const SignUp = () => {
               onSubmit={handleSubmit}
               validationSchema={validations}
             >
-              {({ isSubmitting }) => (
-                <Form noValidate>
-                  <Stack spacing={3}>
-                    <Text color="primary" fontWeight="bold" textAlign="center">
-                      Informe seus dados para continuar
-                    </Text>
+              <Form noValidate>
+                <Stack spacing={3}>
+                  <Text color="primary" fontWeight="bold" textAlign="center">
+                    Informe seus dados para continuar
+                  </Text>
 
-                    <Input
-                      placeholder="Nome"
-                      name="name"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <PersonIcon color="secondary" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
+                  <Input
+                    placeholder="Nome"
+                    name="name"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PersonIcon color="secondary" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
 
-                    <Input
-                      placeholder="E-mail"
-                      name="email"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MailOutlineIcon color="secondary" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
+                  <Input
+                    placeholder="E-mail"
+                    name="email"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MailOutlineIcon color="secondary" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
 
-                    <Input
-                      placeholder="Senha"
-                      name="password"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <KeyIcon color="secondary" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
+                  <Input
+                    placeholder="Senha"
+                    name="password"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <KeyIcon color="secondary" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
 
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      loading={loading}
-                      disabled={loading}
-                    >
-                      Criar conta
-                    </Button>
-                  </Stack>
-                </Form>
-              )}
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    loading={loading}
+                    disabled={loading}
+                  >
+                    Criar conta
+                  </Button>
+                </Stack>
+              </Form>
             </Formik>
           </Box>
         </Paper>
