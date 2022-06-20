@@ -18,10 +18,8 @@ const initialState: CounterState = {
 
 export const incrementAsync = createAsyncThunk(
   'counter/fetchCount',
-  async (amount: number, { getState }) => {
-    const response = await fetchCount(amount);
-    return response.data;
-  },
+  (amount: number, { getState }) =>
+    fetchCount(amount).then(response => response.data),
 );
 
 export const counterSlice = createSlice({

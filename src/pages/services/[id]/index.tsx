@@ -103,25 +103,25 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const { id } = params as { id: string };
       const { page, orderBy, ...restQuery } = getPaginationFromQuery(query);
 
-      const data = await servicesService
+      return servicesService
         .searchWorkers(id, {
           ...restQuery,
           page,
           orderBy,
         })
         .then(data => ({
-          ...data,
-          workers: parseWorkerSummaryToCard(data.workers),
+          props: {
+            ...data,
+            workers: parseWorkerSummaryToCard(data.workers),
+          },
         }))
         .catch(() => ({
-          workers: [],
-          total: 0,
-          hasNext: false,
+          props: {
+            workers: [],
+            total: 0,
+            hasNext: false,
+          },
         }));
-
-      return {
-        props: { ...data },
-      };
     },
 );
 

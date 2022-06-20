@@ -25,28 +25,20 @@ const decodeToken = (token: string) => {
   return decodedToken.user;
 };
 
-export const signUp = createAsyncThunk(
-  'user/signUp',
-  async (userData: SignUpData) => {
-    const response = await usersService.create(userData);
-    const user = decodeToken(response.token);
-    return {
-      token: response.token,
-      ...user,
-    };
-  },
+export const signUp = createAsyncThunk('user/signUp', (userData: SignUpData) =>
+  usersService.create(userData).then(response => ({
+    token: response.token,
+    ...decodeToken(response.token),
+  })),
 );
 
 export const login = createAsyncThunk(
   'user/login',
-  async (userData: LoginData) => {
-    const response = await usersService.login(userData);
-    const user = decodeToken(response.token);
-    return {
+  async (userData: LoginData) =>
+    usersService.login(userData).then(response => ({
       token: response.token,
-      ...user,
-    };
-  },
+      ...decodeToken(response.token),
+    })),
 );
 
 export const userSlice = createSlice({
