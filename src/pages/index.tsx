@@ -91,7 +91,7 @@ const Home: NextPage = () => {
         spacing={4}
         SkeletonItem={{ width: 14, height: 14, variant: 'rectangular' }}
       >
-        <Grid container justifyContent="space-around">
+        <Grid container justifyContent="space-around" spacing={1}>
           {services?.map(service => (
             <Grid item key={service.id}>
               <ServiceCard

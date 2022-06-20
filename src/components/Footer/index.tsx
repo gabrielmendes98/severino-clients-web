@@ -19,8 +19,10 @@ const Footer = () => (
     sx={{
       backgroundColor: theme => theme.palette.bw.main,
       border: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: theme => theme.spacing(8),
+      padding: theme => `${theme.spacing(6)} ${theme.spacing(8)}`,
     }}
+    rowSpacing={2}
+    // spacing={2}
   >
     <Grid container item sm={12} md={4} spacing={3}>
       <Grid item xs={12}>
