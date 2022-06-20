@@ -12,6 +12,7 @@ import Logo from 'components/Logo';
 import Button from 'components/Button';
 import withModal, { InjectedModalProps } from 'components/Modal/withModal';
 import ProfileMenu from './ProfileMenu';
+import NavMenu from './NavMenu';
 
 interface Props extends InjectedModalProps {}
 
@@ -20,11 +21,6 @@ const Header = ({ showModal }: Props) => {
   const isSigned = useSelector(selectUserIsSigned);
   const [displayLocation, setDisplayLocation] = useState('');
   const [clientIsSigned, setClientIsSigned] = useState(false);
-
-  useEffect(() => {
-    setDisplayLocation(location.name);
-    setClientIsSigned(isSigned);
-  }, [location, isSigned]);
 
   const handleLocationClick = () =>
     showModal({
@@ -35,39 +31,57 @@ const Header = ({ showModal }: Props) => {
       },
     });
 
+  useEffect(() => {
+    setDisplayLocation(location.name);
+    setClientIsSigned(isSigned);
+  }, [location, isSigned]);
+
   return (
     <AppBar position="static" color="inherit" variant="outlined" elevation={0}>
-      <Toolbar>
+      <Toolbar
+        sx={{
+          justifyContent: { xs: 'space-between' },
+        }}
+      >
+        <NavMenu isSigned={clientIsSigned} />
+
         <Link href="/">
           <Box sx={{ cursor: 'pointer' }}>
             <Logo />
           </Box>
         </Link>
-        <Box sx={{ flexGrow: 1 }}></Box>
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' } }}></Box>
         <Button startIcon={<LocationOnIcon />} onClick={handleLocationClick}>
           {displayLocation ? displayLocation : 'Informe sua cidade'}
         </Button>
-        <Link href="/services">
-          <Button color="inherit">Contrate um serviço</Button>
-        </Link>
-        {!clientIsSigned && (
-          <>
-            <Link href="/sign-up">
-              <Button color="inherit">Criar conta</Button>
-            </Link>
-            <Link href="/login">
-              <Button color="inherit">Login</Button>
-            </Link>
-          </>
-        )}
-        {clientIsSigned && (
-          <>
-            <Link href="/favorited">
-              <Button color="inherit">Meus favoritos</Button>
-            </Link>
-            <ProfileMenu />
-          </>
-        )}
+
+        <Box
+          sx={{
+            display: { xs: 'none', md: 'block' },
+          }}
+        >
+          <Link href="/services">
+            <Button color="inherit">Contrate um serviço</Button>
+          </Link>
+          {!clientIsSigned && (
+            <>
+              <Link href="/sign-up">
+                <Button color="inherit">Criar conta</Button>
+              </Link>
+              <Link href="/login">
+                <Button color="inherit">Login</Button>
+              </Link>
+            </>
+          )}
+          {clientIsSigned && (
+            <>
+              <Link href="/favorites">
+                <Button color="inherit">Meus favoritos</Button>
+              </Link>
+              <ProfileMenu />
+            </>
+          )}
+        </Box>
       </Toolbar>
     </AppBar>
   );

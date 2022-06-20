@@ -32,7 +32,7 @@ const ProfileMenu = () => {
   };
 
   return (
-    <div>
+    <>
       <Button
         color="inherit"
         id="profile-menu-button"
@@ -55,7 +55,7 @@ const ProfileMenu = () => {
         <MenuItem onClick={handleChangePassword}>Mudar senha</MenuItem>
         <MenuItem onClick={handleSignOut}>Sair</MenuItem>
       </Menu>
-    </div>
+    </>
   );
 };
 
