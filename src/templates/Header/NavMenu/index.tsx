@@ -74,23 +74,28 @@ const NavMenu = ({ isSigned }: Props) => {
         <MenuItem onClick={handleItemClick('/services')}>
           Contrate um serviço
         </MenuItem>
-        {!isSigned && (
-          <>
-            <MenuItem onClick={handleItemClick('/sign-up')}>
-              Criar conta
-            </MenuItem>
-            <MenuItem onClick={handleItemClick('/login')}>Login</MenuItem>
-          </>
-        )}
-        {isSigned && (
-          <>
-            <MenuItem onClick={handleItemClick('/favorites')}>Login</MenuItem>
-            <MenuItem onClick={handleItemClick('/change-password')}>
-              Mudar senha
-            </MenuItem>
-            <MenuItem onClick={handleSignOut}>Sair</MenuItem>
-          </>
-        )}
+        {!isSigned && [
+          <MenuItem key="sign-up" onClick={handleItemClick('/sign-up')}>
+            Criar conta
+          </MenuItem>,
+          <MenuItem key="login" onClick={handleItemClick('/login')}>
+            Login
+          </MenuItem>,
+        ]}
+        {isSigned && [
+          <MenuItem key="favorites" onClick={handleItemClick('/favorites')}>
+            Login
+          </MenuItem>,
+          <MenuItem
+            key="change-password"
+            onClick={handleItemClick('/change-password')}
+          >
+            Mudar senha
+          </MenuItem>,
+          <MenuItem key="logout" onClick={handleSignOut}>
+            Sair
+          </MenuItem>,
+        ]}
       </Menu>
     </Box>
   );
