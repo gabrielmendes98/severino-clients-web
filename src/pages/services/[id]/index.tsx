@@ -58,11 +58,18 @@ const ServiceById = ({
   return (
     <Grid container>
       <Grid container item xs={12}>
-        <Grid item xs={6}>
+        <Grid item xs={9} md={10}>
           <Title title={`Serviço escolhido: ${router.query.serviceName}`} />
         </Grid>
 
-        <Grid container item xs={6} justifyContent="flex-end">
+        <Grid
+          container
+          item
+          xs={3}
+          md={2}
+          justifyContent="flex-end"
+          alignItems="center"
+        >
           <Filter
             content={FilterContent}
             filter={filter}

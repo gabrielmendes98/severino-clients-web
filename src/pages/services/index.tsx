@@ -27,12 +27,12 @@ const Services = () => {
 
   return (
     <Grid container>
-      <Grid container item xs={12}>
-        <Grid item xs={6}>
+      <Grid container item xs={12} spacing={{ xs: 3, md: 0 }}>
+        <Grid item xs={12} md={6}>
           <Title title="Serviços disponíveis" />
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <SearchInput
             placeholder="Busque serviços"
             onChange={searchServices}
