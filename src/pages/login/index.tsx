@@ -25,25 +25,34 @@ const Login = () => {
   const loading = useSelector(selectUserLoading);
 
   const handleSubmit = (values: typeof initialValues) => {
-    dispatch(login(values))
-      .then(state => {
-        if (state.meta.requestStatus !== 'rejected') {
-          toast.success('Bem-vindo(a) ao Severino');
-          router.push('/');
-        }
-      })
-      .catch(e => console.log(e));
+    dispatch(login(values)).then(state => {
+      if (state.meta.requestStatus !== 'rejected') {
+        toast.success('Bem-vindo(a) ao Severino');
+        router.push('/');
+      }
+    });
   };
 
   return (
-    <Grid container spacing={10}>
-      <Grid container item xs={6} justifyContent="flex-end">
+    <Grid container spacing={{ md: 10 }}>
+      <Grid
+        container
+        xs={12}
+        md={6}
+        justifyContent={{ md: 'flex-end', xs: 'center' }}
+      >
         <Image src={loginDoodle} alt="Login Doodle" width={300} height={300} />
       </Grid>
 
-      <Grid container item xs={6}>
+      <Grid
+        container
+        item
+        xs={12}
+        md={6}
+        justifyContent={{ md: 'start', xs: 'center' }}
+      >
         <Paper>
-          <Box padding={4} minWidth={450}>
+          <Box padding={4} minWidth={{ sm: 450 }}>
             <Box marginBottom={3} marginLeft={-2} marginTop={-2}>
               <IconButton aria-label="voltar" title="Voltar" color="primary">
                 <ArrowBack />

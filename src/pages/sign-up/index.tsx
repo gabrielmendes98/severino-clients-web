@@ -35,8 +35,13 @@ const SignUp = () => {
   };
 
   return (
-    <Grid container spacing={10}>
-      <Grid container item xs={6} justifyContent="flex-end">
+    <Grid container spacing={{ md: 10 }}>
+      <Grid
+        container
+        xs={12}
+        md={6}
+        justifyContent={{ md: 'flex-end', xs: 'center' }}
+      >
         <Image
           src={signUpDoodle}
           alt="Sign Up Doodle"
@@ -45,9 +50,15 @@ const SignUp = () => {
         />
       </Grid>
 
-      <Grid container item xs={6}>
+      <Grid
+        container
+        item
+        xs={12}
+        md={6}
+        justifyContent={{ md: 'start', xs: 'center' }}
+      >
         <Paper>
-          <Box padding={4} minWidth={450}>
+          <Box padding={4} minWidth={{ sm: 450 }}>
             <Box marginBottom={3} marginLeft={-2} marginTop={-2}>
               <IconButton aria-label="voltar" title="Voltar" color="primary">
                 <ArrowBack />
