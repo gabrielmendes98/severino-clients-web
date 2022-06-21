@@ -1,6 +1,9 @@
 import { DrawerProps } from '@mui/material/Drawer';
 import { Dispatch, ReactNode, SetStateAction } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
 import Text from 'components/Text';
+import IconButton from 'components/IconButton';
+import Box from 'components/Box';
 import { StyledDrawer } from './styles';
 
 interface Props extends DrawerProps {
@@ -15,9 +18,19 @@ const Drawer = ({ open, setOpen, content, ...props }: Props) => (
     onClose={() => setOpen(false)}
     {...props}
   >
-    <Text color="secondary" fontWeight="bold" marginBottom={3}>
-      Filtros
-    </Text>
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+      marginBottom={3}
+    >
+      <Text color="secondary" fontWeight="bold">
+        Filtros
+      </Text>
+      <IconButton onClick={() => setOpen(false)}>
+        <CloseIcon />
+      </IconButton>
+    </Box>
     {content}
   </StyledDrawer>
 );
