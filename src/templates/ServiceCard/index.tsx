@@ -15,12 +15,16 @@ const ServiceCard = ({ serviceAvatar, serviceName, serviceId }: Props) => {
   const router = useRouter();
 
   const handleClick = () =>
-    router.push({
-      pathname: `/services/${serviceId}`,
-      query: {
-        serviceName,
+    router.push(
+      {
+        pathname: `/services/${serviceId}`,
+        query: {
+          serviceName,
+        },
       },
-    });
+      {},
+      { shallow: true },
+    );
 
   return (
     <Container onClick={handleClick}>
