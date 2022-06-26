@@ -14,7 +14,8 @@ const workersService = {
   // listRecent: () => baseApi.get(workersEndpoints.listRecent),
   favorite: (workerId: WorkerId) =>
     baseApi.post(workersEndpoints.favorites, { workerId }),
-  // listFavorites: () => baseApi.get(workersEndpoints.favorites),
+  listFavorites: () =>
+    baseApi.get<WorkerSummary[], WorkerSummary[]>(workersEndpoints.favorites),
   // getProfile: workerId => baseApi.get(workersEndpoints.profile(workerId)),
   // createReview: data => baseApi.post(workersEndpoints.reviews, { data }),
   // listReviews: (workerId, params) =>
