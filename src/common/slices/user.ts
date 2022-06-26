@@ -41,6 +41,12 @@ export const login = createAsyncThunk(
     })),
 );
 
+export const changePassword = createAsyncThunk(
+  'user/changePassword',
+  async (passwordData: ChangePasswordData) =>
+    usersService.changePassword(passwordData),
+);
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -69,6 +75,15 @@ export const userSlice = createSlice({
         state.status = 'idle';
       })
       .addCase(login.rejected, state => {
+        state.status = 'failed';
+      })
+      .addCase(changePassword.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(changePassword.fulfilled, state => {
+        state.status = 'idle';
+      })
+      .addCase(changePassword.rejected, state => {
         state.status = 'failed';
       })
       .addCase(HYDRATE, (state, { payload }: any) => ({

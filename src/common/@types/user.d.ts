@@ -9,16 +9,23 @@ interface LoginData {
   password: string;
 }
 
+interface ChangePasswordData {
+  currentPassword: string;
+  newPassword: string;
+}
+
 interface AuthResponse {
   token: string;
 }
 
+interface User {
+  id: string;
+  email: string;
+  name: string;
+}
+
 interface DecodedToken {
-  user: {
-    id: string;
-    email: string;
-    name: string;
-  };
+  user: User;
   iat: number;
   exp: number;
 }

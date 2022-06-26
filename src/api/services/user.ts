@@ -10,7 +10,8 @@ const usersService = {
     baseApi.post<AuthResponse, AuthResponse>(usersEndpoints.customers, data),
   login: (data: LoginData) =>
     baseApi.post<AuthResponse, AuthResponse>(usersEndpoints.login, data),
-  // update: data => baseApi.put(usersEndpoints.customers, { data }),
+  changePassword: (data: ChangePasswordData) =>
+    baseApi.put<User, User>(usersEndpoints.customers, data),
 };
 
 export { usersEndpoints };
