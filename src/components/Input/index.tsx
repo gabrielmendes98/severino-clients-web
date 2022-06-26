@@ -1,13 +1,13 @@
 import { useField } from 'formik';
 import InputBase, { InputBaseProps } from './Base';
 
-type Props = InputBaseProps & {
+export type InputProps = InputBaseProps & {
   name: string;
 };
 
-const Input = ({ name, children, ...props }: Props) => {
+const Input = ({ name, children, ...props }: InputProps) => {
   const [field, meta] = useField(name);
-  const { error, touched, ...restMeta } = meta;
+  const { error, touched } = meta;
 
   const hasError = Boolean(touched && error);
 
@@ -15,7 +15,6 @@ const Input = ({ name, children, ...props }: Props) => {
     <InputBase
       error={hasError}
       helperText={hasError && error}
-      {...restMeta}
       {...field}
       {...props}
     >

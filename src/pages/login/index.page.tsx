@@ -17,6 +17,7 @@ import Input from 'components/Input';
 import Box from 'components/Box';
 import InputAdornment from 'components/Input/InputAdornment';
 import Button from 'components/Button';
+import PasswordInput from 'components/Input/Password';
 import { initialValues, validations } from './utils';
 
 const Login = () => {
@@ -82,7 +83,7 @@ const Login = () => {
                     }}
                   />
 
-                  <Input
+                  <PasswordInput
                     placeholder="Senha"
                     name="password"
                     InputProps={{
