@@ -58,11 +58,9 @@ const WorkerCard = ({
 
   return (
     <Container onClick={handleCardClick}>
-      {avatarUrl ? (
-        <Avatar src={avatarUrl} alt="Foto do profissional" />
-      ) : (
-        <Avatar>{textAvatar}</Avatar>
-      )}
+      <Avatar src={avatarUrl!} alt="Foto do profissional">
+        {textAvatar}
+      </Avatar>
 
       <Box display="flex" justifyContent="space-between" marginBottom={1}>
         <Box display="flex">

@@ -37,3 +37,53 @@ interface WorkerSummaryList {
   total: number;
   hasNext: boolean;
 }
+
+interface WorkPhoto {
+  id: string;
+  createdAt: string;
+  updateAt: string;
+  profileId: string;
+  url: string;
+  title: string;
+}
+
+interface Skill {
+  id: string;
+  createdAt: string;
+  updateAt: string;
+  profileId: string;
+  name: string;
+}
+
+interface WorkerProfile {
+  id: string;
+  avatarUrl: string | null;
+  name: string;
+  rating: number;
+  hasWhatsapp: boolean;
+  phone: string | null;
+  location: string;
+  services: string[] | undefined;
+  deion: string | null;
+  workPhotos: WorkPhoto[] | undefined;
+  experiences:
+    | {
+        id: string;
+        role: string;
+        company: string | null;
+        time: string;
+      }[]
+    | undefined;
+  academicGraduations:
+    | {
+        id: string;
+        institution: string;
+        studyArea: string | null;
+        degree: {
+          deion: string;
+        } | null;
+      }[]
+    | undefined;
+  skills: Skill[] | undefined;
+  isFavorite: boolean;
+}
