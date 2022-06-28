@@ -10,9 +10,11 @@ import Avatar from 'components/Avatar';
 import Box from 'components/Box';
 import Button from 'components/Button';
 import Grid from 'components/Grid';
+import withModal, { InjectedModalProps } from 'components/Modal/withModal';
 import Section from '../../Section';
+import showRateWorkerModal from './RateWorker/showModal';
 
-interface Props {
+interface Props extends InjectedModalProps {
   id: string;
   name: string;
   avatarUrl: string | null;
@@ -28,6 +30,7 @@ const PhotoAndActionsSection = ({
   isFavorite,
   whatsAppLink,
   hasWhatsapp,
+  showModal,
 }: Props) => {
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
   const splitName = name.split(' ');
@@ -88,7 +91,12 @@ const PhotoAndActionsSection = ({
 
             <Button startIcon={<VisibilityIcon />}>Ver avaliações</Button>
 
-            <Button startIcon={<StarOutlineIcon />}>Avaliar</Button>
+            <Button
+              startIcon={<StarOutlineIcon />}
+              onClick={() => showRateWorkerModal({ id, name, showModal })}
+            >
+              Avaliar
+            </Button>
 
             <Button startIcon={<ReportIcon />}>Denunciar</Button>
           </Box>
@@ -98,4 +106,4 @@ const PhotoAndActionsSection = ({
   );
 };
 
-export default PhotoAndActionsSection;
+export default withModal(PhotoAndActionsSection);

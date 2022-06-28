@@ -20,7 +20,8 @@ const workersService = {
     baseApi.get<WorkerProfile, WorkerProfile>(
       workersEndpoints.profile(workerId),
     ),
-  // createReview: data => baseApi.post(workersEndpoints.reviews, { data }),
+  createReview: (data: WorkerReview) =>
+    baseApi.post<WorkerReview, WorkerReview>(workersEndpoints.reviews, data),
   // listReviews: (workerId, params) =>
   //   baseApi.get(workersEndpoints.listReviews(workerId), {
   //     params: parseParams(params),

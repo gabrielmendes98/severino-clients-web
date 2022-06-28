@@ -13,9 +13,10 @@ export interface InjectedModalProps {
   showModal: (config: ModalConfig) => void;
   closeModal: () => void;
 }
-interface ModalConfig {
-  body: FunctionComponent<InjectedModalProps>;
+export interface ModalConfig<R = any> {
+  body: FunctionComponent<R & InjectedModalProps>;
   ModalProps?: Omit<DialogProps, 'open'>;
+  BodyProps?: Omit<R, keyof InjectedModalProps>;
 }
 
 const DefaultBody = () => <></>;
@@ -26,6 +27,7 @@ const withModal =
     const [open, setOpen] = useState(false);
     const [config, setConfig] = useState<ModalConfig>({
       body: DefaultBody,
+      BodyProps: {},
     });
 
     const Body = useMemo(() => config.body, [config.body]);
@@ -46,7 +48,11 @@ const withModal =
         />
 
         <Modal {...config.ModalProps} open={open} onClose={closeModal}>
-          <Body showModal={showModal} closeModal={closeModal} />
+          <Body
+            {...config.BodyProps}
+            showModal={showModal}
+            closeModal={closeModal}
+          />
         </Modal>
       </>
     );
