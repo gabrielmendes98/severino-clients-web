@@ -97,8 +97,6 @@ const PhotoAndActionsSection = ({
             >
               Avaliar
             </Button>
-
-            <Button startIcon={<ReportIcon />}>Denunciar</Button>
           </Box>
         </Grid>
       </Grid>

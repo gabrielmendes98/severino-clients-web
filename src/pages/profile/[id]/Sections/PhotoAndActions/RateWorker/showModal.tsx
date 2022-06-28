@@ -1,7 +1,7 @@
-import { ModalConfig } from 'components/Modal/withModal';
+import { InjectedModalProps, ModalConfig } from 'components/Modal/withModal';
 import RateWorker, { RateWorkerProps } from './index';
 
-interface Args extends RateWorkerProps {
+interface Args extends Omit<RateWorkerProps, keyof InjectedModalProps> {
   showModal: (config: ModalConfig<RateWorkerProps>) => void;
 }
 
