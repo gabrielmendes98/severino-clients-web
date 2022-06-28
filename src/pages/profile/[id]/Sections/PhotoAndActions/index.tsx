@@ -50,9 +50,9 @@ const PhotoAndActionsSection = ({
         <Grid item xs={6}>
           <Avatar
             sx={{
-              height: '180px',
-              width: '180px',
-              fontSize: '80px',
+              height: '150px',
+              width: '150px',
+              fontSize: '60px',
               backgroundColor: theme => theme.palette.primary.main,
             }}
             src={avatarUrl!}
