@@ -3,7 +3,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import ReportIcon from '@mui/icons-material/Report';
 import { MouseEvent, useState } from 'react';
 import workersService from 'api/services/workers';
 import Avatar from 'components/Avatar';

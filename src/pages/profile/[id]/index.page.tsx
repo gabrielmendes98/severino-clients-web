@@ -4,15 +4,18 @@ import workersService from 'api/services/workers';
 import useFetch from 'common/hooks/useFetch';
 import { parseNumberToWhatsAppLink } from 'common/utils/parsers';
 import Grid from 'components/Grid';
+import Stack from 'components/Stack';
 import PhotoAndActionsSection from './Sections/PhotoAndActions';
+import { prepareData, PreparedWorkerProfile } from './utils';
+import InfoSection from './Sections/Info';
 
 const WorkerProfile = () => {
   const router = useRouter();
-  const [data, setData] = useState<WorkerProfile>();
+  const [data, setData] = useState<PreparedWorkerProfile>();
   const { request: getProfile, loading } = useFetch(workersService.getProfile);
 
   useEffect(() => {
-    getProfile(String(router.query.id)).then(setData);
+    getProfile(String(router.query.id)).then(prepareData).then(setData);
   }, [getProfile, router.query.id]);
 
   if (loading || !data) {
@@ -20,7 +23,7 @@ const WorkerProfile = () => {
   }
 
   return (
-    <Grid container maxWidth="800px" margin="0 auto">
+    <Stack maxWidth="800px" margin="0 auto" spacing={2}>
       <PhotoAndActionsSection
         id={data.id}
         avatarUrl={data.avatarUrl}
@@ -29,7 +32,17 @@ const WorkerProfile = () => {
         name={data.name}
         whatsAppLink={data.phone ? parseNumberToWhatsAppLink(data.phone) : null}
       />
-    </Grid>
+
+      <InfoSection
+        name={data.name}
+        rating={data.rating}
+        phone={data.formattedPhone}
+        location={data.location}
+        services={data.services}
+        description={data.description}
+        hasWhatsapp={data.hasWhatsappLabel}
+      />
+    </Stack>
   );
 };
 

@@ -86,6 +86,7 @@ interface WorkerProfile {
     | undefined;
   skills: Skill[] | undefined;
   isFavorite: boolean;
+  description: string | undefined;
 }
 
 interface WorkerReview {

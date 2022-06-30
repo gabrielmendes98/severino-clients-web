@@ -8,3 +8,5 @@ export const formatPhone = (phoneNumber: string) => {
   }
   return phoneNumber;
 };
+
+export const formatBoolean = (flag: boolean) => (flag ? 'Sim' : 'Não');
