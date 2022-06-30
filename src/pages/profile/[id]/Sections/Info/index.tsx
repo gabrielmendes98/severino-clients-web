@@ -20,22 +20,18 @@ const InfoSection = ({
   services,
   description,
   hasWhatsapp,
-}: Props) => {
-  console.log('hello');
-
-  return (
-    <Section>
-      <Stack spacing={1}>
-        <InfoItem label="Nome:" value={name} />
-        <InfoItem label="Avaliação média:" value={rating} />
-        <InfoItem label="Telefone:" value={phone} />
-        <InfoItem label="Tem WhatsApp:" value={hasWhatsapp} />
-        <InfoItem label="Localização:" value={location} />
-        <InfoItem label="Serviços que presto:" value={services} />
-        <InfoItem label="Sobre mim:" value={description} />
-      </Stack>
-    </Section>
-  );
-};
+}: Props) => (
+  <Section>
+    <Stack spacing={1}>
+      <InfoItem label="Nome:" value={name} />
+      <InfoItem label="Avaliação média:" value={rating} />
+      <InfoItem label="Telefone:" value={phone} />
+      <InfoItem label="Tem WhatsApp:" value={hasWhatsapp} />
+      <InfoItem label="Localização:" value={location} />
+      <InfoItem label="Serviços que presto:" value={services} />
+      <InfoItem label="Sobre mim:" value={description} />
+    </Stack>
+  </Section>
+);
 
 export default InfoSection;
