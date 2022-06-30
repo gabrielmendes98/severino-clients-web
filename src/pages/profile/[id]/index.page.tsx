@@ -8,6 +8,7 @@ import Stack from 'components/Stack';
 import PhotoAndActionsSection from './Sections/PhotoAndActions';
 import { prepareData, PreparedWorkerProfile } from './utils';
 import InfoSection from './Sections/Info';
+import ProfessionalInfoSection from './Sections/ProfessionalInfo';
 
 const WorkerProfile = () => {
   const router = useRouter();
@@ -41,6 +42,12 @@ const WorkerProfile = () => {
         services={data.services}
         description={data.description}
         hasWhatsapp={data.hasWhatsappLabel}
+      />
+
+      <ProfessionalInfoSection
+        experiences={data.experiences}
+        academicGraduations={data.academicGraduations}
+        skills={data.skills}
       />
     </Stack>
   );

@@ -64,7 +64,6 @@ interface WorkerProfile {
   phone: string | null;
   location: string;
   services: string[] | undefined;
-  deion: string | null;
   workPhotos: WorkPhoto[] | undefined;
   experiences:
     | {
@@ -80,8 +79,8 @@ interface WorkerProfile {
         institution: string;
         studyArea: string | null;
         degree: {
-          deion: string;
-        } | null;
+          description: string;
+        };
       }[]
     | undefined;
   skills: Skill[] | undefined;

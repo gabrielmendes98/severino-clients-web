@@ -10,7 +10,6 @@ export interface PreparedWorkerProfile {
   formattedPhone: string | undefined;
   location: string;
   services: string | undefined;
-  deion: string | null;
   workPhotos: WorkPhoto[] | undefined;
   experiences:
     | {
@@ -26,8 +25,8 @@ export interface PreparedWorkerProfile {
         institution: string;
         studyArea: string | null;
         degree: {
-          deion: string;
-        } | null;
+          description: string;
+        };
       }[]
     | undefined;
   skills: Skill[] | undefined;
