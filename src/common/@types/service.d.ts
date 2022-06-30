@@ -6,8 +6,6 @@ interface Service {
   id: string;
 }
 
-interface ServiceList {
+interface ServiceList extends ListPagination {
   services: Service[];
-  total: number;
-  hasNext: boolean;
 }

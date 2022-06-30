@@ -4,3 +4,8 @@ interface ListParams {
   page: number | string;
   location?: string;
 }
+
+interface ListPagination {
+  total: number;
+  hasNext: boolean;
+}

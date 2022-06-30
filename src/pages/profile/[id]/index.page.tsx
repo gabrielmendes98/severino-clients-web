@@ -9,6 +9,7 @@ import PhotoAndActionsSection from './Sections/PhotoAndActions';
 import { prepareData, PreparedWorkerProfile } from './utils';
 import InfoSection from './Sections/Info';
 import ProfessionalInfoSection from './Sections/ProfessionalInfo';
+import Reviews from './Sections/Reviews';
 
 const WorkerProfile = () => {
   const router = useRouter();
@@ -49,6 +50,8 @@ const WorkerProfile = () => {
         academicGraduations={data.academicGraduations}
         skills={data.skills}
       />
+
+      <Reviews rating={data.rating} name={data.name} />
     </Stack>
   );
 };

@@ -32,10 +32,8 @@ interface WorkerSummary {
     | [];
 }
 
-interface WorkerSummaryList {
+interface WorkerSummaryList extends ListPagination {
   workers: WorkerSummary[];
-  total: number;
-  hasNext: boolean;
 }
 
 interface WorkPhoto {
@@ -88,9 +86,25 @@ interface WorkerProfile {
   description: string | undefined;
 }
 
-interface WorkerReview {
+interface WorkerReviewSubmition {
   workerId: string;
   rating: number;
   title: string;
   comment: string;
+}
+
+interface WorkerReview {
+  id: string;
+  createdAt: strin;
+  updatedAt: string;
+  customerId: string;
+  workerId: string;
+  title: string;
+  comment?: string;
+  rating?: number;
+  isGood: boolean;
+}
+
+interface WorkerReviewList extends ListPagination {
+  reviews: WorkerReview[];
 }

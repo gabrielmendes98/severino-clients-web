@@ -4,7 +4,7 @@ import ListFallback from 'templates/ListFallback';
 import Stack from 'components/Stack';
 import Box from 'components/Box';
 import Text from 'components/Text';
-import InfoTitle from '../InfoTitle';
+import SectionTitle from '../../../Section/Title';
 
 interface Props {
   academicGraduations: PreparedWorkerProfile['academicGraduations'];
@@ -12,7 +12,7 @@ interface Props {
 
 const AcademicGraduations = ({ academicGraduations }: Props) => (
   <>
-    <InfoTitle title="Formação acadêmica" />
+    <SectionTitle title="Formação acadêmica" />
 
     <Stack spacing={2}>
       {academicGraduations ? (

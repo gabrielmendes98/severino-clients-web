@@ -28,11 +28,11 @@ const ServiceById = ({
   const [filter, setFilter] = useState<FilterValues>({
     orderBy: '',
   });
-  const [workersList, setWorkersList] = useState<{
-    workers: WorkerCardProps[];
-    hasNext: boolean;
-    total: number;
-  }>({
+  const [workersList, setWorkersList] = useState<
+    {
+      workers: WorkerCardProps[];
+    } & ListPagination
+  >({
     workers,
     total,
     hasNext,
