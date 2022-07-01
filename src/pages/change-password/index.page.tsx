@@ -6,6 +6,7 @@ import changePasswordDoodle from 'assets/user/changePasswordDoodle.svg';
 import { useDispatch, useSelector } from 'common/store/hooks';
 import { selectUserLoading, changePassword } from 'common/slices/user';
 import toast from 'common/utils/toast';
+import withAuthentication from 'common/hocs/withAuthentication';
 import Grid from 'components/Grid';
 import IconButton from 'components/IconButton';
 import Paper from 'components/Paper';
@@ -102,4 +103,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword;
+export default withAuthentication(ChangePassword);
