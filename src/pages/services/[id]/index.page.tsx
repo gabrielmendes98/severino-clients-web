@@ -9,6 +9,7 @@ import usePagination from 'common/hooks/usePagination';
 import { wrapper } from 'common/store/store';
 import useEffectAfterFirstRender from 'common/hooks/useEffectAfterFirstRender';
 import { getPaginationFromQuery } from 'common/utils/pagination';
+import withLocation from 'common/hocs/withLocation';
 import Filter from 'templates/Filter';
 import WorkerCard, { WorkerCardProps } from 'templates/WorkerCard';
 import { parseWorkerSummaryToCard } from 'templates/WorkerCard/utils';
@@ -110,6 +111,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const { id } = params as { id: string };
       const { page, orderBy, ...restQuery } = getPaginationFromQuery(query);
 
+      if (!store.getState().location.id) {
+        return {
+          props: {
+            workers: [],
+            total: 0,
+            hasNext: false,
+          },
+        };
+      }
+
       return servicesService
         .searchWorkers(id, {
           ...restQuery,
@@ -132,4 +143,5 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default ServiceById;
+export default withLocation(ServiceById);
+// export default ServiceById;

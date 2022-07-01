@@ -15,7 +15,7 @@ import Button from 'components/Button';
 import Box from 'components/Box';
 import { InjectedModalProps } from 'components/Modal/withModal';
 
-const Location = ({ closeModal }: InjectedModalProps) => {
+const Location = ({ closeModal }: Omit<InjectedModalProps, 'showModal'>) => {
   const dispatch = useDispatch();
   const { request: reverseGeocoding, loading: loadingReverseGeocoding } =
     useFetch(locationsService.reverseGeocoding);

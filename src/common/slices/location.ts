@@ -31,5 +31,7 @@ export const locationSlice = createSlice({
 export const { add } = locationSlice.actions;
 
 export const selectLocation = (state: RootState) => state.location;
+export const selectHasLocation = (state: RootState) =>
+  Boolean(state.location.id);
 
 export default locationSlice.reducer;
