@@ -8,7 +8,7 @@ export const handleError = (error: any, { toast = true }) => {
   const status = error.response?.status;
 
   if ((status === 401 || status === 403) && Router.pathname !== '/login') {
-    Router.push('/login');
+    Router.push(`/login?redirect=${Router.router?.asPath.substring(1)}`);
     Toast.error('Você precisa estar logado para realizar essa ação');
   } else if (toast) {
     if (message) {

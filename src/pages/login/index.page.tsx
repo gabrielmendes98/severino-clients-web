@@ -25,11 +25,18 @@ const Login = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectUserLoading);
 
+  console.log(router.query.redirect);
+
   const handleSubmit = (values: typeof initialValues) => {
     dispatch(login(values)).then(state => {
       if (state.meta.requestStatus !== 'rejected') {
         toast.success('Bem-vindo(a) ao Severino');
-        router.push('/');
+        const redirectRoute = router.query.redirect;
+        if (redirectRoute) {
+          router.push(String(redirectRoute));
+        } else {
+          router.push('/');
+        }
       }
     });
   };
