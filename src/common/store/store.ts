@@ -14,13 +14,11 @@ import {
   wrapMakeStore,
 } from 'next-redux-cookie-wrapper';
 import { createWrapper } from 'next-redux-wrapper';
-import counterReducer, { CounterState } from '../slices/counter';
 import locationReducer, { LocationSate } from '../slices/location';
 import userReducer, { UserState } from '../slices/user';
 
 export let store: EnhancedStore<
   {
-    counter: CounterState;
     location: LocationSate;
     user: UserState;
   },
@@ -29,7 +27,6 @@ export let store: EnhancedStore<
     [
       Middleware<{}, any, Dispatch<AnyAction>>,
       ThunkMiddlewareFor<{
-        counter: CounterState;
         location: LocationSate;
         user: UserState;
       }>,
@@ -40,7 +37,6 @@ export let store: EnhancedStore<
 const makeStore = wrapMakeStore(() => {
   store = configureStore({
     reducer: {
-      counter: counterReducer,
       location: locationReducer,
       user: userReducer,
     },

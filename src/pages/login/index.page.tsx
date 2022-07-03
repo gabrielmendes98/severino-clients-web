@@ -25,8 +25,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectUserLoading);
 
-  console.log(router.query.redirect);
-
   const handleSubmit = (values: typeof initialValues) => {
     dispatch(login(values)).then(state => {
       if (state.meta.requestStatus !== 'rejected') {
@@ -45,11 +43,18 @@ const Login = () => {
     <Grid container spacing={{ md: 10 }}>
       <Grid
         container
+        item
         xs={12}
         md={6}
         justifyContent={{ md: 'flex-end', xs: 'center' }}
       >
-        <Image src={loginDoodle} alt="Login Doodle" width={300} height={300} />
+        <Image
+          src={loginDoodle}
+          alt="Login Doodle"
+          width={300}
+          height={300}
+          priority
+        />
       </Grid>
 
       <Grid

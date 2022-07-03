@@ -37,6 +37,7 @@ const ChangePassword = () => {
         container
         xs={12}
         md={6}
+        item
         justifyContent={{ md: 'flex-end', xs: 'center' }}
       >
         <Image
@@ -44,6 +45,7 @@ const ChangePassword = () => {
           alt="Login Doodle"
           width={300}
           height={300}
+          priority
         />
       </Grid>
 

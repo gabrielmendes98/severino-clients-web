@@ -17,8 +17,10 @@ const WorkerProfile = () => {
   const { request: getProfile, loading } = useFetch(workersService.getProfile);
 
   useEffect(() => {
-    getProfile(String(router.query.id)).then(prepareData).then(setData);
-  }, [getProfile, router.query.id]);
+    if (router.isReady) {
+      getProfile(String(router.query.id)).then(prepareData).then(setData);
+    }
+  }, [getProfile, router.query.id, router.isReady]);
 
   return (
     <Stack maxWidth="800px" margin="0 auto" spacing={2}>

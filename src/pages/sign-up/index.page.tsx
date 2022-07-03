@@ -39,6 +39,7 @@ const SignUp = () => {
     <Grid container spacing={{ md: 10 }}>
       <Grid
         container
+        item
         xs={12}
         md={6}
         justifyContent={{ md: 'flex-end', xs: 'center' }}
@@ -48,6 +49,7 @@ const SignUp = () => {
           alt="Sign Up Doodle"
           width={300}
           height={300}
+          priority
         />
       </Grid>
 
