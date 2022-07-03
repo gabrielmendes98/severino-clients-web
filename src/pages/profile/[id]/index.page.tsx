@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import workersService from 'api/services/workers';
 import useFetch from 'common/hooks/useFetch';
 import { parseNumberToWhatsAppLink } from 'common/utils/parsers';
-import Grid from 'components/Grid';
 import Stack from 'components/Stack';
 import PhotoAndActionsSection from './Sections/PhotoAndActions';
 import { prepareData, PreparedWorkerProfile } from './utils';

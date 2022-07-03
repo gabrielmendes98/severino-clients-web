@@ -1,6 +1,5 @@
 import Box from 'components/Box';
 import Skeleton from 'components/Skeleton';
-import Text from 'components/Text';
 import Section from '../Section';
 
 const ProfileLoader = () => (
