@@ -5,8 +5,8 @@ import theme from 'common/styles/theme';
 
 interface Props {
   count?: number;
-  SkeletonItem: SkeletonProps;
-  children: ReactNode;
+  SkeletonItem?: SkeletonProps;
+  children?: ReactNode;
   ready: boolean;
   spacing?: number;
 }
@@ -27,8 +27,8 @@ const Skeleton = ({
           <Grid item key={index}>
             <MuiSkeleton
               {...SkeletonItem}
-              width={theme.spacing(Number(SkeletonItem.width))}
-              height={theme.spacing(Number(SkeletonItem.height))}
+              width={theme.spacing(Number(SkeletonItem?.width))}
+              height={theme.spacing(Number(SkeletonItem?.height))}
             />
           </Grid>
         ))}

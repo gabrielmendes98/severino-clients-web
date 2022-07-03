@@ -10,6 +10,7 @@ import { prepareData, PreparedWorkerProfile } from './utils';
 import InfoSection from './Sections/Info';
 import ProfessionalInfoSection from './Sections/ProfessionalInfo';
 import Reviews from './Sections/Reviews';
+import ProfileLoader from './Loader';
 
 const WorkerProfile = () => {
   const router = useRouter();
@@ -20,38 +21,42 @@ const WorkerProfile = () => {
     getProfile(String(router.query.id)).then(prepareData).then(setData);
   }, [getProfile, router.query.id]);
 
-  if (loading || !data) {
-    return <div>loading...</div>;
-  }
-
   return (
     <Stack maxWidth="800px" margin="0 auto" spacing={2}>
-      <PhotoAndActionsSection
-        id={data.id}
-        avatarUrl={data.avatarUrl}
-        hasWhatsapp={data.hasWhatsapp}
-        isFavorite={data.isFavorite}
-        name={data.name}
-        whatsAppLink={data.phone ? parseNumberToWhatsAppLink(data.phone) : null}
-      />
+      {loading || !data ? (
+        <ProfileLoader />
+      ) : (
+        <>
+          <PhotoAndActionsSection
+            id={data.id}
+            avatarUrl={data.avatarUrl}
+            hasWhatsapp={data.hasWhatsapp}
+            isFavorite={data.isFavorite}
+            name={data.name}
+            whatsAppLink={
+              data.phone ? parseNumberToWhatsAppLink(data.phone) : null
+            }
+          />
 
-      <InfoSection
-        name={data.name}
-        rating={data.rating}
-        phone={data.formattedPhone}
-        location={data.location}
-        services={data.services}
-        description={data.description}
-        hasWhatsapp={data.hasWhatsappLabel}
-      />
+          <InfoSection
+            name={data.name}
+            rating={data.rating}
+            phone={data.formattedPhone}
+            location={data.location}
+            services={data.services}
+            description={data.description}
+            hasWhatsapp={data.hasWhatsappLabel}
+          />
 
-      <ProfessionalInfoSection
-        experiences={data.experiences}
-        academicGraduations={data.academicGraduations}
-        skills={data.skills}
-      />
+          <ProfessionalInfoSection
+            experiences={data.experiences}
+            academicGraduations={data.academicGraduations}
+            skills={data.skills}
+          />
 
-      <Reviews rating={data.rating} name={data.name} />
+          <Reviews rating={data.rating} name={data.name} />
+        </>
+      )}
     </Stack>
   );
 };
