@@ -55,10 +55,10 @@
     }
   },
   "lint-staged": {
-    "./src/**/*.+(js|jsx)": [
+    "./src/**/*.+(ts|tsx)": [
       "eslint --fix"
     ],
-    "**/*.+(js|json|md|jsx)": [
+    "**/*.+(ts|json|md|tsx)": [
       "prettier --write"
     ]
   }
