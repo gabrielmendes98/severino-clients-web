@@ -8,12 +8,9 @@ import {
   GoogleLoginResponseOffline,
 } from 'react-google-login';
 import { Formik, Form } from 'formik';
-import { useRouter } from 'next/router';
-import usersService from 'api/services/user';
 import loginDoodle from 'assets/user/loginDoodle.svg';
 import { useDispatch, useSelector } from 'common/store/hooks';
 import { selectUserLoading, login, oAuthLogin } from 'common/slices/user';
-import toast from 'common/utils/toast';
 import Grid from 'components/Grid';
 import IconButton from 'components/IconButton';
 import Paper from 'components/Paper';
@@ -24,25 +21,14 @@ import Box from 'components/Box';
 import InputAdornment from 'components/Input/InputAdornment';
 import Button from 'components/Button';
 import PasswordInput from 'components/Input/Password';
-import { initialValues, validations } from './utils';
+import { handleAuthResponse, initialValues, validations } from './utils';
 
 const Login = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const loading = useSelector(selectUserLoading);
 
   const handleSubmit = (values: typeof initialValues) => {
-    dispatch(login(values)).then(state => {
-      if (state.meta.requestStatus !== 'rejected') {
-        toast.success('Bem-vindo(a) ao Severino');
-        const redirectRoute = router.query.redirect;
-        if (redirectRoute) {
-          router.push(String(redirectRoute));
-        } else {
-          router.push('/');
-        }
-      }
-    });
+    dispatch(login(values)).then(handleAuthResponse);
   };
 
   const onSuccess = (
@@ -54,17 +40,7 @@ const Login = () => {
           token: response.tokenId,
           provider: 'GOOGLE',
         }),
-      ).then(state => {
-        if (state.meta.requestStatus !== 'rejected') {
-          toast.success('Bem-vindo(a) ao Severino');
-          const redirectRoute = router.query.redirect;
-          if (redirectRoute) {
-            router.push(String(redirectRoute));
-          } else {
-            router.push('/');
-          }
-        }
-      });
+      ).then(handleAuthResponse);
     }
   };
 
