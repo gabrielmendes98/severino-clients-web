@@ -1,4 +1,4 @@
-type OAUTH_PROVIDER = 'GOOGLE' | 'FACEBOOK';
+type OAuthProvider = 'GOOGLE' | 'FACEBOOK';
 
 interface SignUpData {
   name: string;
@@ -34,5 +34,5 @@ interface DecodedToken {
 
 interface OAuthData {
   token: string;
-  provider: OAUTH_PROVIDER;
+  provider: OAuthProvider;
 }

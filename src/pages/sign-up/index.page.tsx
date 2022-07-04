@@ -8,7 +8,9 @@ import { useRouter } from 'next/router';
 import signUpDoodle from 'assets/user/signUpDoodle.svg';
 import toast from 'common/utils/toast';
 import { useDispatch, useSelector } from 'common/store/hooks';
-import { selectUserLoading, signUp } from 'common/slices/user';
+import { oAuthLogin, selectUserLoading, signUp } from 'common/slices/user';
+import { getAuthProviderToken, handleAuthResponse } from 'common/utils/auth';
+import GoogleLoginButton from 'templates/OAuthButtons/Google';
 import Grid from 'components/Grid';
 import IconButton from 'components/IconButton';
 import Paper from 'components/Paper';
@@ -33,6 +35,15 @@ const SignUp = () => {
         router.push('/');
       }
     });
+  };
+
+  const onSuccess = (provider: OAuthProvider) => (response: any) => {
+    dispatch(
+      oAuthLogin({
+        token: getAuthProviderToken(provider, response),
+        provider: provider,
+      }),
+    ).then(handleAuthResponse);
   };
 
   return (
@@ -126,6 +137,13 @@ const SignUp = () => {
                 </Stack>
               </Form>
             </Formik>
+
+            <Box marginTop={2}>
+              <GoogleLoginButton
+                onSuccess={onSuccess('GOOGLE')}
+                disabled={loading}
+              />
+            </Box>
           </Box>
         </Paper>
       </Grid>

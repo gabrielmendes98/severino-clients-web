@@ -2,15 +2,12 @@ import Image from 'next/image';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import KeyIcon from '@mui/icons-material/Key';
-import {
-  GoogleLogin,
-  GoogleLoginResponse,
-  GoogleLoginResponseOffline,
-} from 'react-google-login';
 import { Formik, Form } from 'formik';
 import loginDoodle from 'assets/user/loginDoodle.svg';
 import { useDispatch, useSelector } from 'common/store/hooks';
 import { selectUserLoading, login, oAuthLogin } from 'common/slices/user';
+import { getAuthProviderToken, handleAuthResponse } from 'common/utils/auth';
+import GoogleLoginButton from 'templates/OAuthButtons/Google';
 import Grid from 'components/Grid';
 import IconButton from 'components/IconButton';
 import Paper from 'components/Paper';
@@ -21,7 +18,7 @@ import Box from 'components/Box';
 import InputAdornment from 'components/Input/InputAdornment';
 import Button from 'components/Button';
 import PasswordInput from 'components/Input/Password';
-import { handleAuthResponse, initialValues, validations } from './utils';
+import { initialValues, validations } from './utils';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -31,17 +28,13 @@ const Login = () => {
     dispatch(login(values)).then(handleAuthResponse);
   };
 
-  const onSuccess = (
-    response: GoogleLoginResponse | GoogleLoginResponseOffline,
-  ) => {
-    if ('profileObj' in response) {
-      dispatch(
-        oAuthLogin({
-          token: response.tokenId,
-          provider: 'GOOGLE',
-        }),
-      ).then(handleAuthResponse);
-    }
+  const onSuccess = (provider: OAuthProvider) => (response: any) => {
+    dispatch(
+      oAuthLogin({
+        token: getAuthProviderToken(provider, response),
+        provider: provider,
+      }),
+    ).then(handleAuthResponse);
   };
 
   return (
@@ -124,14 +117,12 @@ const Login = () => {
               </Form>
             </Formik>
 
-            <div>ou</div>
-
-            <GoogleLogin
-              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
-              buttonText="Entrar com Google"
-              onSuccess={onSuccess}
-              cookiePolicy={'single_host_origin'}
-            />
+            <Box marginTop={2}>
+              <GoogleLoginButton
+                onSuccess={onSuccess('GOOGLE')}
+                disabled={loading}
+              />
+            </Box>
           </Box>
         </Paper>
       </Grid>
