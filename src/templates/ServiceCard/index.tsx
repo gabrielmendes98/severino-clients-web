@@ -1,5 +1,5 @@
 import Paper from '@mui/material/Paper';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import theme from 'common/styles/theme';
 import Image from 'components/Image';
 import Text from 'components/Text';
@@ -12,15 +12,17 @@ interface Props {
 }
 
 const ServiceCard = ({ serviceAvatar, serviceName, serviceId }: Props) => {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const handleClick = () =>
-    router.push({
-      pathname: `/services/${serviceId}`,
-      query: {
-        serviceName,
-      },
-    });
+  const handleClick = () => {
+    window.location.href = `/services/${serviceId}?serviceName=${serviceName}`;
+    // router.push({
+    //   pathname: `/services/${serviceId}`,
+    //   query: {
+    //     serviceName,
+    //   },
+    // });
+  };
 
   return (
     <Container onClick={handleClick}>

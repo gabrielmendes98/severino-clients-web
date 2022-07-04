@@ -144,4 +144,3 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 export default withLocation(ServiceById);
-// export default ServiceById;

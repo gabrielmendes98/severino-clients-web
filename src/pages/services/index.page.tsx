@@ -48,7 +48,7 @@ const Services = () => {
         </Grid>
       </Grid>
 
-      <Grid container spacing={4} marginTop={5}>
+      <Grid container  spacing={4} marginTop={5}>
         <Skeleton
           ready={!loadingList}
           count={18}
