@@ -41,6 +41,15 @@ export const login = createAsyncThunk(
     })),
 );
 
+export const oAuthLogin = createAsyncThunk(
+  'user/oAuthLogin',
+  async (userData: OAuthData) =>
+    usersService.oAuthLogin(userData).then(response => ({
+      token: response.token,
+      ...decodeToken(response.token),
+    })),
+);
+
 export const changePassword = createAsyncThunk(
   'user/changePassword',
   async (passwordData: ChangePasswordData) =>
@@ -75,6 +84,16 @@ export const userSlice = createSlice({
         state.status = 'idle';
       })
       .addCase(login.rejected, state => {
+        state.status = 'failed';
+      })
+      .addCase(oAuthLogin.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(oAuthLogin.fulfilled, (state, action) => {
+        Object.assign(state, action.payload);
+        state.status = 'idle';
+      })
+      .addCase(oAuthLogin.rejected, state => {
         state.status = 'failed';
       })
       .addCase(changePassword.pending, state => {

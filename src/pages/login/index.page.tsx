@@ -2,11 +2,17 @@ import Image from 'next/image';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import KeyIcon from '@mui/icons-material/Key';
+import {
+  GoogleLogin,
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+} from 'react-google-login';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
+import usersService from 'api/services/user';
 import loginDoodle from 'assets/user/loginDoodle.svg';
 import { useDispatch, useSelector } from 'common/store/hooks';
-import { selectUserLoading, login } from 'common/slices/user';
+import { selectUserLoading, login, oAuthLogin } from 'common/slices/user';
 import toast from 'common/utils/toast';
 import Grid from 'components/Grid';
 import IconButton from 'components/IconButton';
@@ -37,6 +43,29 @@ const Login = () => {
         }
       }
     });
+  };
+
+  const onSuccess = (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline,
+  ) => {
+    if ('profileObj' in response) {
+      dispatch(
+        oAuthLogin({
+          token: response.tokenId,
+          provider: 'GOOGLE',
+        }),
+      ).then(state => {
+        if (state.meta.requestStatus !== 'rejected') {
+          toast.success('Bem-vindo(a) ao Severino');
+          const redirectRoute = router.query.redirect;
+          if (redirectRoute) {
+            router.push(String(redirectRoute));
+          } else {
+            router.push('/');
+          }
+        }
+      });
+    }
   };
 
   return (
@@ -118,6 +147,15 @@ const Login = () => {
                 </Stack>
               </Form>
             </Formik>
+
+            <div>ou</div>
+
+            <GoogleLogin
+              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
+              buttonText="Entrar com Google"
+              onSuccess={onSuccess}
+              cookiePolicy={'single_host_origin'}
+            />
           </Box>
         </Paper>
       </Grid>

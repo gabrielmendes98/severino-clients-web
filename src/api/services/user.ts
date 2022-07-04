@@ -3,6 +3,7 @@ import { baseApi } from 'api/apis';
 const usersEndpoints = {
   customers: '/customers',
   login: '/customers/session',
+  oAuthLogin: '/customers/session/oauth',
 };
 
 const usersService = {
@@ -12,6 +13,8 @@ const usersService = {
     baseApi.post<AuthResponse, AuthResponse>(usersEndpoints.login, data),
   changePassword: (data: ChangePasswordData) =>
     baseApi.put<User, User>(usersEndpoints.customers, data),
+  oAuthLogin: (data: OAuthData) =>
+    baseApi.post<AuthResponse, AuthResponse>(usersEndpoints.oAuthLogin, data),
 };
 
 export { usersEndpoints };

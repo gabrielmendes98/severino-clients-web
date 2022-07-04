@@ -1,3 +1,5 @@
+type OAUTH_PROVIDER = 'GOOGLE' | 'FACEBOOK';
+
 interface SignUpData {
   name: string;
   email: string;
@@ -28,4 +30,9 @@ interface DecodedToken {
   user: User;
   iat: number;
   exp: number;
+}
+
+interface OAuthData {
+  token: string;
+  provider: OAUTH_PROVIDER;
 }
