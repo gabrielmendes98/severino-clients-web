@@ -4,6 +4,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import { wrapper } from 'common/store/store';
 import ThemeProvider from 'common/providers/Theme';
 import createEmotionCache from 'common/styles/createEmotionCache';
+import CookieInfo from 'templates/CookieInfo';
 import MainLayout from 'components/Layouts/Main';
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -27,6 +28,7 @@ const MyApp = ({
       <MainLayout>
         <Component {...pageProps} />
       </MainLayout>
+      <CookieInfo />
     </ThemeProvider>
   </CacheProvider>
 );

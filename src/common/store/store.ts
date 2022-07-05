@@ -16,11 +16,13 @@ import {
 import { createWrapper } from 'next-redux-wrapper';
 import locationReducer, { LocationSate } from '../slices/location';
 import userReducer, { UserState } from '../slices/user';
+import cookieReducer, { CookieState } from '../slices/cookie';
 
 export let store: EnhancedStore<
   {
     location: LocationSate;
     user: UserState;
+    cookie: CookieState;
   },
   AnyAction,
   MiddlewareArray<
@@ -29,6 +31,7 @@ export let store: EnhancedStore<
       ThunkMiddlewareFor<{
         location: LocationSate;
         user: UserState;
+        cookie: CookieState;
       }>,
     ]
   >
@@ -39,11 +42,12 @@ const makeStore = wrapMakeStore(() => {
     reducer: {
       location: locationReducer,
       user: userReducer,
+      cookie: cookieReducer,
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().prepend(
         nextReduxCookieMiddleware({
-          subtrees: ['location', 'user'],
+          subtrees: ['location', 'user', 'cookie'],
         }),
       ),
   });
