@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -66,6 +66,7 @@ const Header = ({ showModal }: Props) => {
             onChange={handleToggleTheme}
             checked={isDarkTheme}
             inputProps={{ 'aria-label': 'controlled' }}
+            sx={{ display: { xs: 'none', md: 'flex' } }}
           />
         </NoSsr>
 

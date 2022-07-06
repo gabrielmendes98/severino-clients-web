@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'common/store/hooks';
 import { signOut } from 'common/slices/user';
+import { toggleTheme } from 'common/slices/theme';
 import IconButton from 'components/IconButton';
 import Box from 'components/Box';
 
@@ -34,6 +35,10 @@ const NavMenu = ({ isSigned }: Props) => {
     dispatch(signOut());
     handleClose();
     router.push('/');
+  };
+
+  const handleToggleTheme = () => {
+    dispatch(toggleTheme());
   };
 
   return (
@@ -71,6 +76,7 @@ const NavMenu = ({ isSigned }: Props) => {
           display: { xs: 'block', md: 'none' },
         }}
       >
+        <MenuItem onClick={handleToggleTheme}>Alterar tema</MenuItem>
         <MenuItem onClick={handleItemClick('/services')}>
           Contrate um serviço
         </MenuItem>
