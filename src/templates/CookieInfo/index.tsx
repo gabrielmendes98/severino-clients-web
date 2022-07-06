@@ -1,20 +1,19 @@
 import Link from 'next/link';
 import NoSsr from '@mui/material/NoSsr';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import theme from 'common/styles/theme';
 import { useDispatch, useSelector } from 'common/store/hooks';
 import { cookieConsent, selectCookieConsented } from 'common/slices/cookie';
+import useAppTheme from 'common/hooks/useTheme';
 import Paper from 'components/Paper';
 import Text from 'components/Text';
 import Grid from 'components/Grid';
 import Button from 'components/Button';
 
 const CookieInfo = () => {
+  const theme = useAppTheme();
   const cookieConsented = useSelector(selectCookieConsented);
   const dispatch = useDispatch();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
-
-  console.log(cookieConsented);
 
   const handleAccept = () => {
     dispatch(cookieConsent());

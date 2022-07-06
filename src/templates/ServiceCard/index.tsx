@@ -1,6 +1,6 @@
 import Paper from '@mui/material/Paper';
 // import { useRouter } from 'next/router';
-import theme from 'common/styles/theme';
+import useAppTheme from 'common/hooks/useTheme';
 import Image from 'components/Image';
 import Text from 'components/Text';
 import { Container } from './styles';
@@ -12,6 +12,8 @@ interface Props {
 }
 
 const ServiceCard = ({ serviceAvatar, serviceName, serviceId }: Props) => {
+  const theme = useAppTheme();
+
   // const router = useRouter();
 
   const handleClick = () => {

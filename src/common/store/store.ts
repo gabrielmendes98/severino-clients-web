@@ -17,12 +17,14 @@ import { createWrapper } from 'next-redux-wrapper';
 import locationReducer, { LocationSate } from '../slices/location';
 import userReducer, { UserState } from '../slices/user';
 import cookieReducer, { CookieState } from '../slices/cookie';
+import themeReducer, { ThemeState } from '../slices/theme';
 
 export let store: EnhancedStore<
   {
     location: LocationSate;
     user: UserState;
     cookie: CookieState;
+    theme: ThemeState;
   },
   AnyAction,
   MiddlewareArray<
@@ -32,6 +34,7 @@ export let store: EnhancedStore<
         location: LocationSate;
         user: UserState;
         cookie: CookieState;
+        theme: ThemeState;
       }>,
     ]
   >
@@ -43,11 +46,12 @@ const makeStore = wrapMakeStore(() => {
       location: locationReducer,
       user: userReducer,
       cookie: cookieReducer,
+      theme: themeReducer,
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().prepend(
         nextReduxCookieMiddleware({
-          subtrees: ['location', 'user', 'cookie'],
+          subtrees: ['location', 'user', 'cookie', 'theme'],
         }),
       ),
   });
