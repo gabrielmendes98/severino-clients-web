@@ -51,7 +51,27 @@ const makeStore = wrapMakeStore(() => {
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().prepend(
         nextReduxCookieMiddleware({
-          subtrees: ['location', 'user', 'cookie', 'theme'],
+          subtrees: [
+            {
+              subtree: 'location',
+              expires: new Date(
+                new Date().setDate(new Date().getDate() + 10e5),
+              ),
+            },
+            'user',
+            {
+              subtree: 'cookie',
+              expires: new Date(
+                new Date().setDate(new Date().getDate() + 10e5),
+              ),
+            },
+            {
+              subtree: 'theme',
+              expires: new Date(
+                new Date().setDate(new Date().getDate() + 10e5),
+              ),
+            },
+          ],
           expires: new Date(new Date().setDate(new Date().getDate() + 10)),
         }),
       ),
