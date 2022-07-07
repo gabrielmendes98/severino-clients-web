@@ -52,6 +52,7 @@ const makeStore = wrapMakeStore(() => {
       getDefaultMiddleware().prepend(
         nextReduxCookieMiddleware({
           subtrees: ['location', 'user', 'cookie', 'theme'],
+          expires: new Date(new Date().setDate(new Date().getDate() + 10)),
         }),
       ),
   });
