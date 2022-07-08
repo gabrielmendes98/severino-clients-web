@@ -22,7 +22,6 @@ const Footer = () => (
       padding: theme => `${theme.spacing(6)} ${theme.spacing(8)}`,
     }}
     rowSpacing={2}
-    // spacing={2}
   >
     <Grid container item sm={12} md={4} spacing={3}>
       <Grid item xs={12}>
@@ -131,13 +130,6 @@ const Footer = () => (
           </Grid>
         </Grid>
       </Box>
-      {/* <Grid item xs={12} sx={theme => }>
-        .
-      </Grid>
-
-      <Grid item xs={12} sx={theme => }>
-        .
-      </Grid> */}
     </Grid>
   </Grid>
 );
