@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot when not ready 1`] = `
+<div>
+  <div
+    class="Toastify"
+  />
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-item css-1f064cs-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+    >
+      <span
+        class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-1n7gpw1-MuiSkeleton-root"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`should match snapshot when ready 1`] = `
+<div>
+  <div
+    class="Toastify"
+  />
+  <div>
+    children
+  </div>
+</div>
+`;

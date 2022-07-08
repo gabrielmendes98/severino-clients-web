@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<div>
+  <div
+    class="Toastify"
+  />
+  <div
+    class="css-1p5q5e5-MuiStack-root"
+  >
+    <div>
+      item 1
+    </div>
+    <div>
+      item 2
+    </div>
+    <div>
+      item 3
+    </div>
+    <div>
+      item 4
+    </div>
+    <div>
+      item 5
+    </div>
+  </div>
+</div>
+`;
