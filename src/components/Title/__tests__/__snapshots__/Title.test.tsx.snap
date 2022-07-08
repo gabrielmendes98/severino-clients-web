@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<div>
+  <div
+    class="Toastify"
+  />
+  <div
+    class="css-17un093"
+  >
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-1wlit04-MuiTypography-root"
+    >
+      test title
+    </h5>
+  </div>
+</div>
+`;
