@@ -1,29 +1,31 @@
 import React, { FC, ReactElement, ReactNode } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { PreloadedState } from '@reduxjs/toolkit';
 import ThemeProvider from './common/providers/Theme';
-import { makeStore } from './common/store/store';
+import { AppStore, RootState, setupStore } from './common/store/store';
 
-// const Wrapper: FC<{ children: React.ReactNode }> = ({ children }) => (
-//   <ThemeProvider>{children}</ThemeProvider>
-// );
-
-// const customRender = (
-//   ui: ReactElement,
-//   options?: Omit<RenderOptions, 'wrapper'>,
-// ) => render(ui, { wrapper: wrapper.withRedux(Wrapper), ...options });
+interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
+  preloadedState?: PreloadedState<RootState>;
+  store?: AppStore;
+}
 
 const customRender = (
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>,
+  {
+    preloadedState = {},
+    // Automatically create a store instance if no store was passed in
+    store = setupStore(preloadedState),
+    ...renderOptions
+  }: ExtendedRenderOptions = {},
 ) => {
   const Wrapper: FC<{ children: ReactNode }> = ({ children }) => (
-    <Provider store={makeStore({})}>
+    <Provider store={store}>
       <ThemeProvider>{children}</ThemeProvider>
     </Provider>
   );
 
-  return { ...render(ui, { wrapper: Wrapper, ...options }) };
+  return { ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 };
 
 /* eslint-disable */

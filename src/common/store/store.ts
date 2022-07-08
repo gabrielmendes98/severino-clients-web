@@ -1,53 +1,34 @@
 import {
   Action,
-  AnyAction,
+  combineReducers,
   configureStore,
-  Dispatch,
-  EnhancedStore,
-  Middleware,
-  MiddlewareArray,
+  PreloadedState,
   ThunkAction,
 } from '@reduxjs/toolkit';
-import { ThunkMiddlewareFor } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
 import {
   nextReduxCookieMiddleware,
   wrapMakeStore,
 } from 'next-redux-cookie-wrapper';
 import { createWrapper } from 'next-redux-wrapper';
-import locationReducer, { LocationSate } from '../slices/location';
-import userReducer, { UserState } from '../slices/user';
-import cookieReducer, { CookieState } from '../slices/cookie';
-import themeReducer, { ThemeState } from '../slices/theme';
+import locationReducer from '../slices/location';
+import userReducer from '../slices/user';
+import cookieReducer from '../slices/cookie';
+import themeReducer from '../slices/theme';
 
-export let store: EnhancedStore<
-  {
-    location: LocationSate;
-    user: UserState;
-    cookie: CookieState;
-    theme: ThemeState;
-  },
-  AnyAction,
-  MiddlewareArray<
-    [
-      Middleware<{}, any, Dispatch<AnyAction>>,
-      ThunkMiddlewareFor<{
-        location: LocationSate;
-        user: UserState;
-        cookie: CookieState;
-        theme: ThemeState;
-      }>,
-    ]
-  >
->;
+export let store: ReturnType<typeof setupStore>;
 
-export const makeStore = wrapMakeStore(() => {
-  store = configureStore({
-    reducer: {
-      location: locationReducer,
-      user: userReducer,
-      cookie: cookieReducer,
-      theme: themeReducer,
-    },
+// Create the root reducer separately so we can extract the RootState type
+const rootReducer = combineReducers({
+  location: locationReducer,
+  user: userReducer,
+  cookie: cookieReducer,
+  theme: themeReducer,
+});
+
+export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
+  configureStore({
+    reducer: rootReducer,
+    preloadedState,
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().prepend(
         nextReduxCookieMiddleware({
@@ -76,11 +57,14 @@ export const makeStore = wrapMakeStore(() => {
         }),
       ),
   });
+
+export const makeStore = wrapMakeStore(() => {
+  store = setupStore();
   return store;
 });
 
 export type AppStore = ReturnType<typeof makeStore>;
-export type RootState = ReturnType<AppStore['getState']>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = AppStore['dispatch'];
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
