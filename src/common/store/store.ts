@@ -40,7 +40,7 @@ export let store: EnhancedStore<
   >
 >;
 
-const makeStore = wrapMakeStore(() => {
+export const makeStore = wrapMakeStore(() => {
   store = configureStore({
     reducer: {
       location: locationReducer,
