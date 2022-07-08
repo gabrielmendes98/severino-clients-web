@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<div>
+  <div
+    class="Toastify"
+  />
+  <div
+    class="MuiAvatar-root MuiAvatar-circular css-61edrn-MuiAvatar-root"
+  >
+    <img
+      alt="test"
+      class="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
+      src="mock"
+    />
+  </div>
+</div>
+`;

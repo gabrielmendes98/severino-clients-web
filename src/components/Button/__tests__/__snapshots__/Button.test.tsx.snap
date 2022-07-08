@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<div>
+  <div
+    class="Toastify"
+  />
+  <button
+    class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root css-5hitqp-MuiButtonBase-root-MuiButton-root"
+    tabindex="0"
+    type="button"
+  >
+    default button
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
