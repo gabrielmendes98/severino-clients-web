@@ -73,7 +73,7 @@ const Footer = () => (
           </Grid>
 
           <Grid item xs={12}>
-            <Link href="/">
+            <Link href="https://dsrfs16mf05d6.cloudfront.net/" target="_blank">
               <MuiLink
                 underline="none"
                 color="text.primary"
@@ -85,7 +85,7 @@ const Footer = () => (
           </Grid>
 
           <Grid item xs={12}>
-            <Link href="/">
+            <Link href="/about-us">
               <MuiLink
                 underline="none"
                 color="text.primary"
@@ -97,7 +97,7 @@ const Footer = () => (
           </Grid>
 
           <Grid item xs={12}>
-            <Link href="/">
+            <Link href="/terms-and-conditions">
               <MuiLink
                 underline="none"
                 color="text.primary"
