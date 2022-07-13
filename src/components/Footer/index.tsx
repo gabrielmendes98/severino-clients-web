@@ -22,6 +22,7 @@ const Footer = () => (
       padding: theme => `${theme.spacing(6)} ${theme.spacing(8)}`,
     }}
     rowSpacing={2}
+    component="footer"
   >
     <Grid container item sm={12} md={4} spacing={3}>
       <Grid item xs={12}>
