@@ -87,25 +87,17 @@ const Footer = () => (
 
           <Grid item xs={12}>
             <Link href="/about-us">
-              <MuiLink
-                underline="none"
-                color="text.primary"
-                sx={{ cursor: 'pointer' }}
-              >
+              <Text color="text.primary" sx={{ cursor: 'pointer' }}>
                 Sobre nós
-              </MuiLink>
+              </Text>
             </Link>
           </Grid>
 
           <Grid item xs={12}>
             <Link href="/terms-and-conditions">
-              <MuiLink
-                underline="none"
-                color="text.primary"
-                sx={{ cursor: 'pointer' }}
-              >
+              <Text color="text.primary" sx={{ cursor: 'pointer' }}>
                 Termos e condições
-              </MuiLink>
+              </Text>
             </Link>
           </Grid>
         </Grid>
