@@ -23,6 +23,16 @@ const MyApp = ({
     <Head>
       <title>Severino</title>
       <meta name="viewport" content="initial-scale=1, width=device-width" />
+      <meta charSet="UTF-8" />
+      <meta
+        name="description"
+        content="Severino é uma plataforma para pessoas encontrarem profissionais que consigam resolver seus problemas. Nosso objetivo é tornar mais fácil a busca e o contato com diferentes prestadores de serviço. Além disso, você pode consultar o currículo e as avaliações dos profissionais e escolher o que mais te agrada"
+      />
+      <meta
+        name="keywords"
+        content="Severino, trabalhadores, trabalho, profissionais, resolver problemas"
+      />
+      <meta name="author" content="Gabriel Santiago" />
     </Head>
     <ThemeProvider>
       <MainLayout>
