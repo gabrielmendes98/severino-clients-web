@@ -49,7 +49,7 @@ const NavMenu = ({ isSigned }: Props) => {
     >
       <IconButton
         size="large"
-        aria-label="account of current user"
+        aria-label="main menu"
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={handleOpen}
