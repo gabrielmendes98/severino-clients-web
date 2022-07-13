@@ -73,15 +73,16 @@ const Footer = () => (
           </Grid>
 
           <Grid item xs={12}>
-            <Link href="https://dsrfs16mf05d6.cloudfront.net/" target="_blank">
-              <MuiLink
-                underline="none"
-                color="text.primary"
-                sx={{ cursor: 'pointer' }}
-              >
-                Quero ser prestador de serviços
-              </MuiLink>
-            </Link>
+            <MuiLink
+              underline="none"
+              color="text.primary"
+              sx={{ cursor: 'pointer' }}
+              href="https://dsrfs16mf05d6.cloudfront.net/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Quero ser prestador de serviços
+            </MuiLink>
           </Grid>
 
           <Grid item xs={12}>

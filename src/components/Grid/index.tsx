@@ -1,7 +1,7 @@
 import MuiGrid, { GridProps as MuiGridProps } from '@mui/material/Grid';
 import { ElementType } from 'react';
 
-interface GridProps extends MuiGridProps {
+export interface GridProps extends MuiGridProps {
   component?: ElementType<any> & (ElementType<any> | undefined);
 }
 
