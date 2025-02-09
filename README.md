@@ -2,17 +2,17 @@
 
 <a href="https://severino-clients-web.vercel.app/" target="_blank">Live Demo</a>
 
-Severino é uma aplicação que busca facilitar a pesquisa por profissionais de
-diversas áreas, como um catálogo mais moderno.
+Severino is an application that seeks to facilitate the search for professionals in
+various areas, as a more modern catalog.
 
-Este projeto é uma das partes da aplicação Severino, que será composta por:
+This project is one of the parts of the Severino application, which will consist of:
 
-- Um portal web para os clientes (React) - Corresponde a este repositório
-- Um app para os clientes (React Native)
-- Um portal para os profissionais (React)
-- Um servidor para servir todas as aplicações (NodeJS)
+- A web portal for customers (React) - Corresponds to this repository
+- An app for customers (React Native)
+- A portal for professionals (React)
+- A server to serve all applications (NodeJS)
 
-As Principais bibliotecas utilizadas para fazer essa aplicação foram:
+The main libraries used to make this application were:
 
 - React
 - Nextjs
@@ -23,7 +23,7 @@ As Principais bibliotecas utilizadas para fazer essa aplicação foram:
 - Emotionjs
 - Axios
 
-Para testes automatizados e testes estáticos, foram utilizados:
+For automated tests and static tests, the following were used:
 
 - Jest
 - React Testing Library
@@ -33,7 +33,7 @@ Para testes automatizados e testes estáticos, foram utilizados:
 - Husky
 - Lint Staged
 
-Para hospedagem foi utilizado:
+For hosting, the following were used:
 
 - Vercel
 
@@ -41,19 +41,19 @@ Para hospedagem foi utilizado:
 <hr/>
 <br/>
 
-### Testes
+### Tests
 
-Foram implementados os testes dos Components. Ainda é necessário implementar os testes dos outros modulos do sistema.
+The Components tests have been implemented. It is still necessary to implement the tests for the other modules of the system.
 
-### Arquitetura geral:
+### General architecture:
 
-![arquitetura-geral](https://user-images.githubusercontent.com/26449308/146116357-83ade62b-9c51-4f55-ad7c-be62c8aedb11.png)
+![general-architecture](https://user-images.githubusercontent.com/26449308/146116357-83ade62b-9c51-4f55-ad7c-be62c8aedb11.png)
 
 ### TODO:
 
-- Finalizar testes das pastas: common, templates e pages.
+- Finish testing the folders: common, templates and pages.
 
-### Rodando localmente:
+### Running locally:
 
 - `yarn`
 - `yarn dev`
